@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "erabot"
+version = "0.1.0"
+description = "Free, local LLM-cost estimator — find what your codebase spends on LLM API calls. No upload, no signup."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "erabot" }]
+keywords = ["llm", "cost", "openai", "anthropic", "gemini", "tokens", "ai-cost", "finops", "static-analysis"]
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Software Development :: Quality Assurance",
+]
+dependencies = [
+  "typer>=0.12",
+  "rich>=13",
+  "tree-sitter>=0.23",
+  "tree-sitter-language-pack>=1.0",
+  "tiktoken>=0.7",
+]
+
+[project.urls]
+Homepage = "https://erabot.ai"
+Source = "https://github.com/rohan3008/erabot"
+
+[project.scripts]
+erabot = "erabot.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["erabot*"]
+
+[tool.setuptools.package-data]
+"erabot._engine" = ["**/*.json"]
