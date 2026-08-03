@@ -10,7 +10,8 @@ from __future__ import annotations
 import re
 
 _NODE = re.compile(r"""add_node\(\s*['"]([^'"]+)['"]""")
-_EDGE = re.compile(r"""add_edge\(\s*['"]([^'"]+)['"]\s*,\s*(['"]?)([A-Za-z_]\w*)\2""")
+# source and target may be quoted node names OR bare START/END constants
+_EDGE = re.compile(r"""add_edge\(\s*(['"]?)(\w+)\1\s*,\s*(['"]?)(\w+)\3""")
 _COND = re.compile(r"""add_conditional_edges\(\s*['"]([^'"]+)['"]""")
 _ENTRY = re.compile(r"""set_entry_point\(\s*['"]([^'"]+)['"]""")
 _INVOKE = re.compile(r"\.(invoke|stream|ainvoke|astream)\(")
@@ -33,8 +34,9 @@ def scan_orchestration(files: list[dict]) -> list[dict]:
             continue
         path = f.get("path", "")
         nodes = set(_NODE.findall(src))
-        edge_targets = {m[2] for m in _EDGE.findall(src)}
-        edge_sources = {m[0] for m in _EDGE.findall(src)}
+        _edges = _EDGE.findall(src)                 # (q, source, q, target)
+        edge_sources = {m[1] for m in _edges}
+        edge_targets = {m[3] for m in _edges}
         cond_sources = set(_COND.findall(src))
         entry = set(_ENTRY.findall(src))
         has_cap = bool(_RECURSION.search(src))
