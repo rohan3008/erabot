@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json as _json
+import re
 from pathlib import Path
 from typing import Optional
 
@@ -28,10 +29,18 @@ _SKIP_DIRS = {"node_modules", ".git", ".venv", "venv", "env", "dist", "build",
 # spend is only modeled.
 _FLAGSHIP = ("gpt-4o", "gpt-4-", "gpt-4.5", "gpt-4-turbo", "o1", "o3",
              "claude-3-opus", "claude-opus", "gemini-1.5-pro", "gemini-2.5-pro")
+# Cheap tiers that share a flagship prefix (gpt-4o-mini ⊃ "gpt-4o") but are NOT
+# downgrade candidates — they ARE the downgrade. Matched as delimited TOKENS, not
+# substrings, so "gemini" (⊃ "mini") isn't mistaken for a utility model. Checked
+# first so the headline flagship-share never miscounts an already-cheap model.
+_UTILITY_MARKERS = frozenset(
+    ("mini", "nano", "flash", "lite", "haiku", "8b", "small", "instant"))
 
 
 def _is_flagship(model: str) -> bool:
     m = (model or "").lower()
+    if _UTILITY_MARKERS.intersection(re.split(r"[-_.\s]+", m)):
+        return False
     return any(f in m for f in _FLAGSHIP)
 
 
