@@ -170,6 +170,16 @@ def estimate(
             f"\n[dim]{untraced} of {len(rows)} call sites build their prompt at runtime, so this is a "
             f"lower bound — connect Helicone/Langfuse/OTel for measured spend.[/dim]"
         )
+    # Orchestration risks in agent graphs (LangGraph): loops with no cap, dead
+    # branches. Candidate flags — the full audit proves and fixes them.
+    from erabot._engine.orchestration_scan import scan_orchestration
+    oflags = scan_orchestration(files)
+    if oflags:
+        console.print(
+            f"\n  ⚑ [bold]{len(oflags)}[/bold] orchestration risk(s) in your agent graph "
+            f"(unbounded loops / missing caps). The full audit proves & fixes them."
+        )
+
     console.print(
         "\n[dim]Free local scan — nothing left your machine. For findings + apply-ready fixes,"
         " run the full audit at [/dim][bold]https://erabot.ai[/bold]\n"
