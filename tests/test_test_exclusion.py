@@ -26,7 +26,15 @@ def test_example_demo_sample_filenames_excluded():
         assert _is_test_path(Path(p)), p
 
 
+def test_compound_test_dir_names_excluded():
+    for p in ("internal/standard-tests/src/chat_models.ts",
+              "src/integration_tests/foo.ts",
+              "packages/e2e-tests/run.js",
+              "environment_tests/index.tsx"):
+        assert _is_test_path(Path(p)), p
+
+
 def test_real_product_files_not_excluded():
     for p in ("planner.py", "latest_model.py", "contest_service.py",
-              "greatest.py"):
+              "greatest.py", "src/attestation/verify.py", "app/latest/page.tsx"):
         assert not _is_test_path(Path(p)), p

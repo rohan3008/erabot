@@ -37,9 +37,22 @@ _TEST_FILE_SUFFIXES = ("_test.py", "_eval.py", "_evaluate.py", "_evaluation.py",
 _TEST_NAME_PREFIXES = ("test_", "test-", "eval_", "eval-", "benchmark_", "benchmark-")
 
 
+# Dir-name components that mark a test/example dir, so compound names like
+# "integration_tests" / "standard-tests" / "e2e-tests" are caught (split on
+# - and _). Kept tight to avoid excluding product dirs: "latest"/"attestation"
+# tokenise to a single component that is not in this set.
+_TEST_DIR_TOKENS = {"test", "tests", "e2e", "spec", "specs", "example", "examples",
+                    "eval", "evals", "benchmark", "benchmarks", "fixtures", "demo", "demos"}
+
+
 def _is_test_path(p: Path) -> bool:
-    if any(part.lower() in _TEST_DIRS for part in p.parts):
-        return True
+    for part in p.parts:
+        low = part.lower()
+        if low in _TEST_DIRS:
+            return True
+        # compound dir names: integration_tests, standard-tests, e2e-tests
+        if {t for t in re.split(r"[-_]", low) if t} & _TEST_DIR_TOKENS:
+            return True
     name = p.name.lower()
     return (name.startswith(_TEST_NAME_PREFIXES)
             or name in ("conftest.py", "example.py", "demo.py", "sample.py")

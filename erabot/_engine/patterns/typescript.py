@@ -27,8 +27,8 @@ TYPESCRIPT_PATTERNS = """
     object: (member_expression
       property: (property_identifier) @chain_part)
     property: (property_identifier) @method_name)
-  (#match? @chain_part "^(completions|messages|chat|embeddings|models|images|audio|speech|files|responses|assistants|threads|runs|moderations|transcriptions|translations)$")
-  (#match? @method_name "^(create|list|retrieve|delete|generate|cancel|stream|parse|edit)$")
+  (#match? @chain_part "^(completions|messages|chat|embeddings|models|images|audio|speech|responses|runs|moderations|transcriptions|translations)$")
+  (#match? @method_name "^(create|generate|stream|parse|edit)$")
 ) @llm_call
 
 ; --- Method Pattern ---
@@ -36,7 +36,7 @@ TYPESCRIPT_PATTERNS = """
 (call_expression
   function: (member_expression
     property: (property_identifier) @method_name)
-  (#match? @method_name "^(generateContent|generateContentStream|invoke|complete|sendMessage|countTokens|embedContent|invokeModel|chatStream|streamText|generateText)$")
+  (#match? @method_name "^(generateContent|generateContentStream|invoke|complete|sendMessage|embedContent|invokeModel|chatStream|streamText|generateText)$")
 ) @llm_call
 
 ; --- Bare Function Pattern (Vercel AI SDK) ---
