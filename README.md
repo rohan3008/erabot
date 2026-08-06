@@ -36,9 +36,15 @@ A LangGraph loop with no explicit `recursion_limit` falls back to the framework 
 - **missing iteration caps** — a looping graph invoked with no `recursion_limit`
 - **dead branches** — nodes declared but never reachable
 
+### Agent-loop cost (any framework)
+
+Separately — and *not* limited to LangGraph — `erabot` detects when a call site sits inside an agent loop (a `while`/`for` loop, or a bounded `range(max_turns)`) and multiplies its cost by the inferred turns per task. A call that looks cheap once may run 4–8× per task. Where the code pins the cap (`max_turns=6`) erabot reads it; otherwise it uses a conservative band and says so. This works across raw SDK loops, CrewAI, and others — the estimate flags `⚑ This looks agentic` when it fires.
+
 ### These flags are measured, not vibes
 
-Run on 5 real LangGraph repos (`langgraph`, `open_deep_research`, and 3 others — 97 graph-defining files): the loop flags fire only where a loop actually exists with no explicit cap — **100% precision on that corpus, and 0 false flags on graphs that already set a `recursion_limit`.** (Method + numbers: we publish the eval.) Honest limits below.
+Run on 5 real LangGraph repos (`langgraph`, `open_deep_research`, and 3 others — 97 graph-defining files): the loop flags fire only where a loop actually exists with no explicit cap — **100% precision on that corpus, and 0 false flags on graphs that already set a `recursion_limit`.**
+
+And the call-site detection itself was measured on **9 real AI codebases** (including held-out repos it wasn't tuned on): **~97% precision**, with 100% recall on unambiguous SDK calls. Full method, numbers, and known false positives: [`docs/precision-eval.md`](docs/precision-eval.md).
 
 ## Get a real cost number, not a guess
 
@@ -55,7 +61,7 @@ Where your prompts are literals in the code, erabot reads the real token counts.
 
 - The `$/mo` figure is **modeled** on an assumed call volume until you pass `--calls-per-month`; treat it as a shape, not a bill.
 - Orchestration flags are **candidates** — a cap may be set elsewhere than erabot can see statically. They tell you where to look, not that you're definitely wrong.
-- Loop-risk detection currently covers **LangGraph**; other frameworks are on the roadmap.
+- The graph **risk flags** (uncapped loops / dead branches) currently cover **LangGraph** only; other graph frameworks are on the roadmap. (Agent-loop *cost* detection, above, is framework-agnostic.)
 
 ## What's free vs. what's not
 
