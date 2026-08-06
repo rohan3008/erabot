@@ -49,11 +49,17 @@ def scan_orchestration(files: list[dict]) -> list[dict]:
         if has_loop and not has_cap:
             flags.append(_flag(path, "unbounded_loop",
                 "a conditional/tool loop can re-enter a node with no recursion_limit set "
-                "— a candidate for an unbounded agentic loop"))
-        if invoked and not has_cap:
+                "— it relies on LangGraph's default cap, so a runaway loop can still cost "
+                "up to that default (candidate; a cap may be set elsewhere)"))
+        # Only flag a missing cap where a loop ACTUALLY exists — a linear graph
+        # cannot iterate, so it needs no recursion_limit. (Eval 2026-08-06: firing
+        # on any invoked graph gave ~19% precision, 81% false positives on linear
+        # graphs.) Requires has_loop AND invoked-without-a-cap.
+        if has_loop and invoked and not has_cap:
             flags.append(_flag(path, "missing_iteration_cap",
-                "the graph is invoked with no recursion_limit in any config — no bound on "
-                "iterations (candidate; a cap may be set elsewhere)"))
+                "a looping graph is invoked with no recursion_limit in any config — it "
+                "relies on the default cap; set an explicit, lower limit to bound cost "
+                "(candidate; a cap may be set elsewhere)"))
         # Unreachable-branch detection is only reliable when there are NO
         # conditional edges: their routing targets are a dict/function we can't
         # read statically, so a node they route to would look unreachable. When
