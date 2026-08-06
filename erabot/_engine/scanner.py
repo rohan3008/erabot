@@ -240,6 +240,57 @@ def _is_nonllm_query(method_name: str, call_text: str) -> bool:
     return "engine" not in receiver.lower()
 
 
+# LangChain gives tools, search, retrievers, and parsers the same .invoke/.ainvoke
+# Runnable interface as models, so `tool.ainvoke(...)` / `search.ainvoke(...)` match
+# the method pattern but are not LLM calls. Deny by receiver NAME COMPONENT (split
+# on _ and camelCase) so "research"/"research_chain" (contains "search" only as a
+# substring) is NOT wrongly denied.
+_INVOKE_DENY_COMPONENTS = frozenset({
+    "tool", "tools", "search", "retriever", "parser", "scraper", "api",
+    "loader", "splitter",
+})
+# .complete/.acomplete is LlamaIndex `llm.complete(...)` but collides with common
+# non-LLM methods (shtab.complete shell-completion, futures). Keep it only for an
+# LLM-ish receiver.
+_LLM_RECV_COMPONENTS = frozenset({
+    "llm", "model", "models", "client", "llama", "llamaindex", "chat", "oai",
+    "openai", "anthropic", "claude", "gpt", "gemini", "cohere", "mistral",
+    "completion", "engine", "assistant", "agent", "copilot", "bot", "ai",
+})
+
+
+def _receiver_components(recv: str) -> set:
+    """Lowercased name components of a receiver identifier (split on _ and camelCase)."""
+    spaced = re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "_", recv or "")
+    return {p.lower() for p in spaced.split("_") if p}
+
+
+def _receiver_before(call_text: str, method_name: str) -> str:
+    """The bare identifier immediately before `.method(`, or "" when the receiver is
+    a chained call / attribute the regex can't resolve (in which case we keep it)."""
+    m = re.search(rf"(\w+)\s*\.\s*{re.escape(method_name)}\s*\(", call_text or "")
+    return m.group(1) if m else ""
+
+
+def _ambiguous_method_is_nonllm(method_name: str, call_text: str) -> bool:
+    """Gate methods shared with non-LLM objects. invoke/ainvoke: drop tool/search/
+    retriever/parser receivers. complete/acomplete: keep only LLM-ish receivers."""
+    if method_name in ("invoke", "ainvoke"):
+        recv = _receiver_before(call_text, method_name)
+        if not recv:
+            return False  # chained/attribute receiver — keep (usually a real model call)
+        comps = _receiver_components(recv)
+        if comps & _LLM_RECV_COMPONENTS:
+            return False  # llm_with_tools, chat_model — LLM signal wins over "tools"
+        return bool(comps & _INVOKE_DENY_COMPONENTS)
+    if method_name in ("complete", "acomplete"):
+        recv = _receiver_before(call_text, method_name)
+        if not recv:
+            return False
+        return not (_receiver_components(recv) & _LLM_RECV_COMPONENTS)
+    return False
+
+
 def _extract_call_metadata(call_text: str) -> dict:
     """Extract metadata flags from a detected LLM call's text.
 
@@ -339,6 +390,9 @@ def detect_llm_calls(file_path: str, content: str) -> list[dict]:
 
         # Drop data-store .query()/.aquery() (Qdrant/pandas/SQL), keep LLM engines.
         if _is_nonllm_query(method_name, call_text):
+            continue
+        # Drop invoke/ainvoke on tools/search and complete on non-LLM receivers.
+        if _ambiguous_method_is_nonllm(method_name, call_text):
             continue
 
         model = _extract_model(call_text)

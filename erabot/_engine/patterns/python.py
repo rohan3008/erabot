@@ -45,7 +45,7 @@ PYTHON_PATTERNS = """
     object: (attribute
       attribute: (identifier) @chain_part)
     attribute: (identifier) @method_name)
-  (#match? @chain_part "^(completions|messages|chat|embeddings|models|images|audio|speech|files|fine_tuning|batches|moderations|responses|assistants|threads|runs|transcriptions|translations)$")
+  (#match? @chain_part "^(completions|messages|chat|embeddings|models|images|audio|speech|fine_tuning|batches|moderations|responses|assistants|threads|runs|transcriptions|translations)$")
   (#match? @method_name "^(create|acreate|list|retrieve|delete|generate|cancel|stream|parse|edit|edits|submit_tool_outputs)$")
 ) @llm_call
 

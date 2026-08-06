@@ -21,6 +21,11 @@ def test_underscore_prefixes_still_excluded():
     assert _is_test_path(Path("foo_eval.py"))
 
 
+def test_example_demo_sample_filenames_excluded():
+    for p in ("tools/stagehand/example.py", "pkg/demo.py", "sample.py"):
+        assert _is_test_path(Path(p)), p
+
+
 def test_real_product_files_not_excluded():
     for p in ("planner.py", "latest_model.py", "contest_service.py",
               "greatest.py"):

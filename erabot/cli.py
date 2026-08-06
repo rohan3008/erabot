@@ -41,7 +41,8 @@ def _is_test_path(p: Path) -> bool:
     if any(part.lower() in _TEST_DIRS for part in p.parts):
         return True
     name = p.name.lower()
-    return (name.startswith(_TEST_NAME_PREFIXES) or name == "conftest.py"
+    return (name.startswith(_TEST_NAME_PREFIXES)
+            or name in ("conftest.py", "example.py", "demo.py", "sample.py")
             or name.endswith(_TEST_FILE_SUFFIXES))
 # Flagship models: expensive tiers that are prime downgrade candidates. This
 # share is volume-independent, so it's the credible headline even when absolute
