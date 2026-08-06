@@ -32,13 +32,16 @@ _TEST_DIRS = {"test", "tests", "testing", "example", "examples", "eval", "evals"
               "sample", "samples", "demo", "demos", "e2e", "fixtures", "notebooks"}
 _TEST_FILE_SUFFIXES = ("_test.py", "_eval.py", "_evaluate.py", "_evaluation.py",
                        "_benchmark.py", "_bench.py")
+# Prefix + its separator, so "test-openapi-key.py" is caught like "test_foo.py"
+# but "latest.py"/"contest.py" (prefix not followed by a separator) are not.
+_TEST_NAME_PREFIXES = ("test_", "test-", "eval_", "eval-", "benchmark_", "benchmark-")
 
 
 def _is_test_path(p: Path) -> bool:
     if any(part.lower() in _TEST_DIRS for part in p.parts):
         return True
     name = p.name.lower()
-    return (name.startswith(("test_", "eval_", "benchmark_")) or name == "conftest.py"
+    return (name.startswith(_TEST_NAME_PREFIXES) or name == "conftest.py"
             or name.endswith(_TEST_FILE_SUFFIXES))
 # Flagship models: expensive tiers that are prime downgrade candidates. This
 # share is volume-independent, so it's the credible headline even when absolute

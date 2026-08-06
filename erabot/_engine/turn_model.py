@@ -22,15 +22,15 @@ def _indent(line: str) -> int:
     return len(line) - len(line.lstrip())
 
 
-def _enclosing_loop(lines: list[str], idx: int) -> bool:
-    """Scope-aware: is the call at `idx` (0-based) inside a for/while loop, by
-    indentation? Walk upward for the nearest header at a lower indent than the
-    current bar: a for/while means enclosed; a def/class means we hit the function
-    boundary with no enclosing loop; any other block header (if/with/try) moves the
-    bar up and we keep looking. This ignores sibling/earlier loops that don't
-    actually enclose the call (the file-global 'any loop above' bug)."""
+def _enclosing_loop_header(lines: list[str], idx: int):
+    """Scope-aware: the header line of the nearest for/while loop enclosing the
+    call at `idx` (0-based), or None. Walk upward for the nearest header at a lower
+    indent than the current bar: a for/while means enclosed (return its text); a
+    def/class means we hit the function boundary with no enclosing loop; any other
+    block header (if/with/try) moves the bar up and we keep looking. This ignores
+    sibling/earlier loops that don't actually enclose the call."""
     if idx < 0 or idx >= len(lines):
-        return False
+        return None
     bar = _indent(lines[idx])
     for j in range(idx - 1, -1, -1):
         ln = lines[j]
@@ -40,11 +40,56 @@ def _enclosing_loop(lines: list[str], idx: int) -> bool:
         if ind < bar:
             head = ln.lstrip()
             if re.match(r"(for|while|async\s+for)\b", head):
-                return True
+                return head.rstrip()
             if re.match(r"(def|async\s+def|class)\b", head):
-                return False
+                return None
             bar = ind  # if/with/try/elif/else — a loop may still enclose this block
-    return False
+    return None
+
+
+def _enclosing_loop(lines: list[str], idx: int) -> bool:
+    return _enclosing_loop_header(lines, idx) is not None
+
+
+_RANGE_RE = re.compile(r"\bfor\b.*\bin\s+range\s*\(([^)]*)\)")
+
+
+def _resolve_int_name(name: str, code: str):
+    """Resolve an integer bound for `name` from a function default arg
+    (name=6 / name: int = 6) or a plain assignment (name = 6) in `code`. Comments
+    and strings are blanked first so a value in a docstring never counts. Ignores
+    comparisons (==, >=). Returns None if not resolvable to a literal int."""
+    stripped = _strip_noncode(code or "")
+    m = re.search(rf"\b{re.escape(name)}\s*(?::[^,=()]+)?(?<![=!<>])=(?!=)\s*(\d+)\b",
+                  stripped)
+    return int(m.group(1)) if m else None
+
+
+def _loop_range_bound(header: str, code: str):
+    """Iteration count for a `for ... in range(...)` header, or None when it isn't
+    a range loop or the bound can't be resolved to a literal int (while loops,
+    for-over-iterable, range(1, n+1) expressions)."""
+    m = _RANGE_RE.search(header or "")
+    if not m:
+        return None
+    args = [a.strip() for a in m.group(1).split(",") if a.strip()]
+    if not args or len(args) > 3:
+        return None
+
+    def resolve(tok: str):
+        if re.fullmatch(r"\d+", tok):
+            return int(tok)
+        if re.fullmatch(r"[A-Za-z_]\w*", tok):
+            return _resolve_int_name(tok, code)
+        return None  # an expression like n+1 — don't evaluate
+
+    if len(args) == 1:
+        return resolve(args[0])
+    start, stop = resolve(args[0]), resolve(args[1])
+    if start is None or stop is None:
+        return None
+    n = stop - start
+    return n if n >= 1 else None
 
 
 # A call whose receiver is an agent/executor/crew object: `agent.run(...)`,
@@ -179,7 +224,13 @@ def estimate_calls_per_task(code: str, call_line: int, end_line: int | None = No
             return {"calls_per_task": n, "basis": f"config:{name}@construction",
                     "low": 1, "high": n}
     # 3) is the call actually INSIDE an enclosing for/while (by scope)?
-    if lines and _enclosing_loop(lines, idx):
+    header = _enclosing_loop_header(lines, idx) if lines else None
+    if header is not None:
+        # Read a real `range(N)` bound (literal / default-arg / assignment) if we
+        # can; otherwise fall back to the conservative band.
+        bound = _loop_range_bound(header, code or "")
+        if bound is not None:
+            return {"calls_per_task": bound, "basis": "loop:range", "low": 1, "high": bound}
         return {"calls_per_task": _LOOP_DEFAULT, "basis": "loop",
                 "low": _LOOP_BAND[0], "high": _LOOP_BAND[1]}
     # 4) single call
