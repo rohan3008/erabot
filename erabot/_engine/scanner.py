@@ -216,6 +216,30 @@ def _extract_model(call_text: str) -> Optional[str]:
     return None
 
 
+# `.query()`/`.aquery()` is matched as an LLM call for LlamaIndex query engines
+# (query_engine.query("...")), but the name is NOT unique to LLM SDKs — vector
+# stores (Qdrant, Pinecone, Weaviate, Chroma), SQL (SQLAlchemy db_session.query),
+# and dataframes (pandas) all expose .query(). A blocklist of receiver names can't
+# keep up with compound names (db_session, sf_client, sync_db), so invert it: the
+# LlamaIndex call is the query ENGINE, so keep query/aquery only when the receiver
+# expression names an engine and drop everything else.
+_QUERY_METHOD_RE = re.compile(r"\.\s*a?query\s*\(")
+
+
+def _is_nonllm_query(method_name: str, call_text: str) -> bool:
+    """True when a query/aquery match is a data-store call, not an LLM query.
+
+    Keep it only for a LlamaIndex query engine — query_engine.query(...),
+    self.query_engine.query(...), index.as_query_engine().query(...) — where the
+    receiver expression contains "engine". Everything else (db_session.query,
+    shard.query, collection.query, df.query) is a data lookup, so it's dropped."""
+    if method_name not in ("query", "aquery"):
+        return False
+    m = _QUERY_METHOD_RE.search(call_text or "")
+    receiver = call_text[:m.start()] if m else (call_text or "")
+    return "engine" not in receiver.lower()
+
+
 def _extract_call_metadata(call_text: str) -> dict:
     """Extract metadata flags from a detected LLM call's text.
 
@@ -312,6 +336,10 @@ def detect_llm_calls(file_path: str, content: str) -> list[dict]:
         scoped_captures = _captures_in_node(captures, node)
         provider = _infer_provider(call_text, scoped_captures)
         method_name = _extract_method_name_for_node(node, captures)
+
+        # Drop data-store .query()/.aquery() (Qdrant/pandas/SQL), keep LLM engines.
+        if _is_nonllm_query(method_name, call_text):
+            continue
 
         model = _extract_model(call_text)
 
