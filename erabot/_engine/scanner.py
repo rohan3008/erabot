@@ -383,7 +383,12 @@ def detect_llm_calls(file_path: str, content: str) -> list[dict]:
             continue
         seen_ranges.add(node_range)
 
-        call_text = content[node.start_byte:node.end_byte]
+        # node.text is the exact source bytes for this node. Do NOT slice
+        # content[start_byte:end_byte] — content is a str but tree-sitter offsets
+        # are BYTE offsets, so any non-ASCII char earlier in the file (em-dash,
+        # smart quote, emoji) shifts the slice and corrupts call_text — which
+        # broke receiver gates and model extraction.
+        call_text = node.text.decode("utf-8", errors="ignore")
         scoped_captures = _captures_in_node(captures, node)
         provider = _infer_provider(call_text, scoped_captures)
         method_name = _extract_method_name_for_node(node, captures)

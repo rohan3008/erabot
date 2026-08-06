@@ -45,8 +45,8 @@ PYTHON_PATTERNS = """
     object: (attribute
       attribute: (identifier) @chain_part)
     attribute: (identifier) @method_name)
-  (#match? @chain_part "^(completions|messages|chat|embeddings|models|images|audio|speech|fine_tuning|batches|moderations|responses|assistants|threads|runs|transcriptions|translations)$")
-  (#match? @method_name "^(create|acreate|list|retrieve|delete|generate|cancel|stream|parse|edit|edits|submit_tool_outputs)$")
+  (#match? @chain_part "^(completions|messages|chat|embeddings|models|images|audio|speech|fine_tuning|batches|moderations|responses|runs|transcriptions|translations)$")
+  (#match? @method_name "^(create|acreate|generate|stream|parse|edit|edits|submit_tool_outputs)$")
 ) @llm_call
 
 ; --- Method Pattern ---
@@ -62,6 +62,6 @@ PYTHON_PATTERNS = """
 ; stream_chat/astream_chat (LlamaIndex chat engines), chat_completion (HF/router).
 ; Generic bare functions (completion/embed/moderation) were tested and REVERTED —
 ; they matched non-LLM same-named functions and dropped precision to 0.88.
-  (#match? @method_name "^(generate_content|generate_content_async|embed_content|embed_content_async|count_tokens|invoke|ainvoke|complete|acomplete|completion|acompletion|query|aquery|invoke_model|invoke_model_with_response_stream|chat_stream|stream_chat|astream_chat|chat_completion)$")
+  (#match? @method_name "^(generate_content|generate_content_async|embed_content|embed_content_async|invoke|ainvoke|complete|acomplete|completion|acompletion|query|aquery|invoke_model|invoke_model_with_response_stream|chat_stream|stream_chat|astream_chat|chat_completion)$")
 ) @llm_call
 """
