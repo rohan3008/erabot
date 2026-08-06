@@ -155,10 +155,27 @@ def estimate(
     resolved_calls = config.resolved_calls_per_month()
     turns = config.resolved_calls_per_task()
 
+    # Per-site agent-loop turns, inferred statically (framework-agnostic): an
+    # explicit bound (max_turns/max_iter/recursion_limit) wins; else a surrounding
+    # for/while loop → ~4× (band 2–8); else 1. This makes the estimate account for
+    # agentic loop cost instead of assuming one call per site. A global
+    # --turns-per-task overrides it. See turn_model.
+    from erabot._engine.turn_model import estimate_calls_per_task
     rows, total, flagship_total, traced_sites = [], 0.0, 0.0, 0
+    loop_sites, inferred_turns = 0, []
     for c in calls:
-        est = calculate_finding_cost(c, config)
+        est = calculate_finding_cost(c, config)          # config turns=explicit or 1
         mc = float(est.get("monthly_cost_usd", 0) or 0)
+        if config._turns_explicit:
+            site_turns, basis = turns, "user"            # already applied by config
+        else:
+            tm = estimate_calls_per_task(c.get("file_content", ""), c.get("line") or 1, c.get("end_line"))
+            site_turns = max(1, int(tm.get("calls_per_task", 1)))
+            basis = tm.get("basis", "single")
+            mc *= site_turns                             # apply inferred loop turns
+        if site_turns > 1:
+            loop_sites += 1
+            inferred_turns.append(site_turns)
         model = est.get("model") or c.get("model") or ""
         if not model or model.lower() in ("unknown", "?"):
             model = "model unresolved"
@@ -170,9 +187,15 @@ def estimate(
             flagship_total += mc
         rows.append({"file": str(c.get("file_path", "")), "line": c.get("line"),
                      "provider": c.get("provider") or "?", "model": model,
-                     "mo": mc, "traced": in_tok > 60})
+                     "mo": mc, "traced": in_tok > 60, "turns": site_turns, "basis": basis})
     rows.sort(key=lambda r: r["mo"], reverse=True)
     fshare = (flagship_total / total * 100) if total else 0.0
+    # Agentic if any call site loops (statically-inferred turns > 1) or a LangGraph
+    # loop flag fired — framework-agnostic, not LangGraph-only.
+    is_agentic = is_agentic or loop_sites > 0
+    avg_turns = round(sum(inferred_turns) / len(inferred_turns), 1) if inferred_turns else 1
+    if avg_turns == int(avg_turns):  # 4.0 → 4 for cleaner display
+        avg_turns = int(avg_turns)
 
     if as_json:
         console.print_json(_json.dumps({
@@ -180,9 +203,11 @@ def estimate(
             "estimated_monthly_usd": round(total, 2), "calls_per_month_per_site": resolved_calls,
             "volume_assumed": not explicit_volume, "flagship_spend_pct": round(fshare, 1),
             "sites_with_traced_prompts": traced_sites,
-            "agentic": is_agentic, "turns_per_task": turns,
-            "turns_assumed": not config._turns_explicit, "orchestration_risks": len(oflags),
-            "estimate_is_per_turn_floor": is_agentic and not config._turns_explicit,
+            "agentic": is_agentic,
+            "turns_per_task": turns if config._turns_explicit else avg_turns,
+            "turns_assumed": not config._turns_explicit,
+            "turns_inferred_statically": (not config._turns_explicit) and loop_sites > 0,
+            "loop_call_sites": loop_sites, "orchestration_risks": len(oflags),
             "top": rows[:15],
         }))
         return
@@ -192,15 +217,20 @@ def estimate(
                 + ("" if explicit_volume else " [dim](assumed — pass --calls-per-month for your real volume)[/dim]"))
     # Lead with the money and the flagship-share (both credible + repo-independent);
     # the raw site count is a rough static pass, so it comes last and labeled.
-    turn_note = f" × [bold]{turns}[/bold] turns/task" if config._turns_explicit else ""
+    if config._turns_explicit:
+        turn_note = f" × [bold]{turns}[/bold] turns/task"
+    elif loop_sites:
+        turn_note = f" [dim](incl. ~{avg_turns}× inferred loop turns)[/dim]"
+    else:
+        turn_note = ""
     console.print(f"\n  Estimated [bold]${total:,.0f}/mo[/bold] on LLM calls {vol_note}{turn_note}")
     if is_agentic and not config._turns_explicit:
         console.print(
-            "  [bold yellow]⚑ This looks agentic[/bold yellow] [dim]— it has agent loops, so each "
-            "loop call site fires MANY times per task, re-sending the system prompt + tools every "
-            "turn. The number above is a [bold]per-turn floor[/bold]; real cost ≈ turns-per-run × it. "
-            "Turns-per-run isn't in the code — pass [bold]--turns-per-task[/bold] for a real number, "
-            "or run the full audit to measure it from traces.[/dim]"
+            "  [bold yellow]⚑ This looks agentic[/bold yellow] [dim]— it has agent loops, so those "
+            f"call sites fire many times per task. We read the loops and estimated their turns "
+            f"(~{avg_turns}× per task, usually 2–8), so the number above [bold]already includes[/bold] "
+            "them. Static code can't show the exact turn count, though — pass [bold]--turns-per-task[/bold] "
+            "for your real number, or run the full audit to measure it from traces.[/dim]"
         )
     if fshare >= 1:
         console.print(
