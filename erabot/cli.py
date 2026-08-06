@@ -24,6 +24,22 @@ def _root() -> None:
 _CODE_EXT = {".py", ".ts", ".tsx", ".js", ".jsx", ".mjs"}
 _SKIP_DIRS = {"node_modules", ".git", ".venv", "venv", "env", "dist", "build",
               "__pycache__", "site-packages", ".next", ".tox", "vendor", ".mypy_cache"}
+# Test / eval / example trees are excluded by default — otherwise a benchmark
+# harness shows up as a company's "top cost site", which is misleading. Opt back
+# in with --include-tests.
+_TEST_DIRS = {"test", "tests", "testing", "example", "examples", "eval", "evals",
+              "evaluation", "evaluations", "benchmark", "benchmarks", "docs", "doc",
+              "sample", "samples", "demo", "demos", "e2e", "fixtures", "notebooks"}
+_TEST_FILE_SUFFIXES = ("_test.py", "_eval.py", "_evaluate.py", "_evaluation.py",
+                       "_benchmark.py", "_bench.py")
+
+
+def _is_test_path(p: Path) -> bool:
+    if any(part.lower() in _TEST_DIRS for part in p.parts):
+        return True
+    name = p.name.lower()
+    return (name.startswith(("test_", "eval_", "benchmark_")) or name == "conftest.py"
+            or name.endswith(_TEST_FILE_SUFFIXES))
 # Flagship models: expensive tiers that are prime downgrade candidates. This
 # share is volume-independent, so it's the credible headline even when absolute
 # spend is only modeled.
@@ -44,20 +60,25 @@ def _is_flagship(model: str) -> bool:
     return any(f in m for f in _FLAGSHIP)
 
 
-def _collect_files(target: Path) -> list[dict]:
+def _collect_files(target: Path, include_tests: bool = False) -> tuple[list[dict], int]:
+    """Returns (files, n_test_files_skipped)."""
     files: list[dict] = []
+    skipped = 0
     if target.is_file():
-        return [{"path": str(target), "content": target.read_text(errors="replace")}]
+        return [{"path": str(target), "content": target.read_text(errors="replace")}], 0
     for p in target.rglob("*"):
         if p.suffix.lower() not in _CODE_EXT:
             continue
         if any(part in _SKIP_DIRS for part in p.parts):
             continue
+        if not include_tests and _is_test_path(p):
+            skipped += 1
+            continue
         try:
             files.append({"path": str(p), "content": p.read_text(errors="replace")})
         except (OSError, UnicodeError):
             continue
-    return files
+    return files, skipped
 
 
 @app.command()
@@ -70,6 +91,10 @@ def estimate(
     completion_ratio: Optional[float] = typer.Option(
         None, "--completion-ratio", help="Completion tokens as a fraction of input tokens (default 0.5)."),
     as_json: bool = typer.Option(False, "--json", help="Emit machine-readable JSON instead of a table."),
+    include_tests: bool = typer.Option(
+        False, "--include-tests",
+        help="Include test/eval/example/benchmark files (excluded by default — they'd "
+             "otherwise show up as your top cost sites)."),
 ) -> None:
     """Scan a codebase for LLM API calls and estimate monthly spend — locally."""
     target = Path(path)
@@ -77,12 +102,15 @@ def estimate(
         console.print(f"[red]Path not found:[/red] {path}")
         raise typer.Exit(2)
 
-    files = _collect_files(target)
+    files, skipped_tests = _collect_files(target, include_tests=include_tests)
     calls = scan_files_for_llm_calls(files)
     if not calls:
         console.print("[yellow]No LLM API calls detected.[/yellow] "
                       "(erabot scans Python/TS/JS for OpenAI, Anthropic, Gemini, LangChain, etc.)")
         raise typer.Exit(0)
+    if skipped_tests and not as_json:
+        console.print(f"[dim]Excluded {skipped_tests} test/eval/example file(s) so they don't "
+                      f"skew the numbers — pass --include-tests to include them.[/dim]")
 
     # Collapse duplicate detections at the same call site (the scanner can emit
     # more than one pattern match for a single call) — one call site, one row.
