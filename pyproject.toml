@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "erabot"
 version = "0.1.0"
-description = "Free, local LLM-cost estimator — find what your codebase spends on LLM API calls. No upload, no signup."
+description = "Find AI-agent cost risks in your code — uncapped LangGraph loops, missing caps, and LLM call-site costs. Local, no signup, MIT."
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.10"

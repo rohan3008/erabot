@@ -1,8 +1,8 @@
 # erabot
 
-**Find out what your codebase spends on LLM API calls — locally, in seconds.**
+**Find the cost risks in your AI agent's code — the runaway loops and missing caps that token counters miss. Locally, in seconds.**
 
-`erabot` scans your source for LLM calls (OpenAI, Anthropic, Gemini, LangChain, LlamaIndex…), estimates the monthly cost, and shows you where the money goes. It runs **entirely on your machine** — no upload, no signup, no account.
+Most "LLM cost" tools count tokens. `erabot` also reads your agent's **orchestration** — the LangGraph loops and branches where cost actually runs away — and flags the ones with no cap set. Plus the usual: every LLM call site (OpenAI, Anthropic, Gemini, LangChain, LlamaIndex…) and its estimated monthly cost. Runs **entirely on your machine** — no upload, no signup, no account.
 
 ```bash
 pipx install erabot        # or: pip install erabot
@@ -20,11 +20,27 @@ erabot estimate .
   classify.py:44               gpt-4o ⚑            $188.00
   ...
 
+  ⚑ 2 orchestration risk(s) in your agent graph (unbounded loops / missing caps).
+    researcher.py:40  a conditional loop with no recursion_limit — relies on the
+                      default cap (10007), so a runaway loop can cost up to that.
+
   Free local scan — nothing left your machine. For findings + apply-ready fixes,
   run the full audit at https://erabot.ai
 ```
 
-## Get a real number, not a guess
+## Why the loop risks matter
+
+A LangGraph loop with no explicit `recursion_limit` falls back to the framework default (**10007** iterations). One badly-conditioned agent can quietly burn thousands of LLM calls before it stops. Generic token counters can't see this — it's a property of the *graph*, not the prompt. `erabot` flags:
+
+- **uncapped loops** — a conditional / tool loop that relies on the default cap
+- **missing iteration caps** — a looping graph invoked with no `recursion_limit`
+- **dead branches** — nodes declared but never reachable
+
+### These flags are measured, not vibes
+
+Run on 5 real LangGraph repos (`langgraph`, `open_deep_research`, and 3 others — 97 graph-defining files): the loop flags fire only where a loop actually exists with no explicit cap — **100% precision on that corpus, and 0 false flags on graphs that already set a `recursion_limit`.** (Method + numbers: we publish the eval.) Honest limits below.
+
+## Get a real cost number, not a guess
 
 Static analysis can't see how often each call fires, so the default assumes a volume. Set your real traffic:
 
@@ -35,19 +51,25 @@ erabot estimate . --json                        # machine-readable output for CI
 
 Where your prompts are literals in the code, erabot reads the real token counts. Where the prompt is built at runtime, the estimate is a **lower bound** — connect Helicone / Langfuse / OpenTelemetry for measured spend.
 
+## Honest limits
+
+- The `$/mo` figure is **modeled** on an assumed call volume until you pass `--calls-per-month`; treat it as a shape, not a bill.
+- Orchestration flags are **candidates** — a cap may be set elsewhere than erabot can see statically. They tell you where to look, not that you're definitely wrong.
+- Loop-risk detection currently covers **LangGraph**; other frameworks are on the roadmap.
+
 ## What's free vs. what's not
 
 | Free (this tool) | Full audit — [erabot.ai](https://erabot.ai) |
 |---|---|
-| Detect LLM call sites | Diagnosed findings + root cause |
-| Estimate `$/mo`, model mix, flagship share | Apply-ready fixes + patches |
+| Detect LLM call sites + estimate `$/mo`, model mix, flagship share | Diagnosed findings + root cause |
+| Flag agent-loop cost risks (uncapped loops, missing caps) | **Prove** which calls are safe to downgrade / which loops are safe to cap |
 | 100% local, no signup | Shadow-verified % savings, enterprise dashboard, CI cost-gate |
 
-Detection is open source (MIT). The agentic audit — which tells you *which* calls are safe to downgrade and writes the fix — is the paid product.
+Detection is open source (MIT). The engine that *proves* a fix is safe — before you ship it — is the paid product.
 
 ## What it detects
 
-Python, TypeScript, and JavaScript. Direct SDK calls, framework idioms (LangChain chains, LlamaIndex query engines), and common wrapper patterns, via tree-sitter AST analysis.
+Python, TypeScript, and JavaScript for call sites (direct SDK calls, LangChain chains, LlamaIndex query engines, common wrapper patterns), and LangGraph graph construction for the loop-risk flags — all via tree-sitter AST analysis.
 
 ---
 
