@@ -88,6 +88,11 @@ def estimate(
         None, "--calls-per-month", "-c",
         help="Invocations per month per call site. Set this to your real volume for a real number "
              "(default 10,000 is only an assumption)."),
+    turns_per_task: Optional[int] = typer.Option(
+        None, "--turns-per-task", "-t",
+        help="Agent-loop turns per task — how many times a loop call site fires per user "
+             "request. Agentic systems fire many calls per task; without this, an agent "
+             "site's cost is a PER-TURN floor. Not visible from code — set it or connect traces."),
     completion_ratio: Optional[float] = typer.Option(
         None, "--completion-ratio", help="Completion tokens as a fraction of input tokens (default 0.5)."),
     as_json: bool = typer.Option(False, "--json", help="Emit machine-readable JSON instead of a table."),
@@ -112,6 +117,14 @@ def estimate(
         console.print(f"[dim]Excluded {skipped_tests} test/eval/example file(s) so they don't "
                       f"skew the numbers — pass --include-tests to include them.[/dim]")
 
+    # Is this an AGENTIC codebase? A LangGraph loop means each loop call site fires
+    # MANY times per task, re-sending the harness each turn — so a flat per-call
+    # estimate is the wrong model (cost = tasks × turns-per-run × per-call, and
+    # turns-per-run isn't visible in code). Detect it and reframe honestly.
+    from erabot._engine.orchestration_scan import scan_orchestration
+    oflags = scan_orchestration(files)
+    is_agentic = any(f["kind"] in ("unbounded_loop", "missing_iteration_cap") for f in oflags)
+
     # Collapse duplicate detections at the same call site (the scanner can emit
     # more than one pattern match for a single call) — one call site, one row.
     _seen, _deduped = set(), []
@@ -134,10 +147,13 @@ def estimate(
     config = EstimationConfig(
         calls_per_month=calls_per_month,
         completion_ratio=completion_ratio,
+        calls_per_task=turns_per_task,
         _volume_explicit=explicit_volume,
         _completion_ratio_explicit=completion_ratio is not None,
+        _turns_explicit=turns_per_task is not None,
     )
     resolved_calls = config.resolved_calls_per_month()
+    turns = config.resolved_calls_per_task()
 
     rows, total, flagship_total, traced_sites = [], 0.0, 0.0, 0
     for c in calls:
@@ -163,7 +179,11 @@ def estimate(
             "call_sites": len(calls), "files": len(files),
             "estimated_monthly_usd": round(total, 2), "calls_per_month_per_site": resolved_calls,
             "volume_assumed": not explicit_volume, "flagship_spend_pct": round(fshare, 1),
-            "sites_with_traced_prompts": traced_sites, "top": rows[:15],
+            "sites_with_traced_prompts": traced_sites,
+            "agentic": is_agentic, "turns_per_task": turns,
+            "turns_assumed": not config._turns_explicit, "orchestration_risks": len(oflags),
+            "estimate_is_per_turn_floor": is_agentic and not config._turns_explicit,
+            "top": rows[:15],
         }))
         return
 
@@ -172,7 +192,16 @@ def estimate(
                 + ("" if explicit_volume else " [dim](assumed — pass --calls-per-month for your real volume)[/dim]"))
     # Lead with the money and the flagship-share (both credible + repo-independent);
     # the raw site count is a rough static pass, so it comes last and labeled.
-    console.print(f"\n  Estimated [bold]${total:,.0f}/mo[/bold] on LLM calls {vol_note}")
+    turn_note = f" × [bold]{turns}[/bold] turns/task" if config._turns_explicit else ""
+    console.print(f"\n  Estimated [bold]${total:,.0f}/mo[/bold] on LLM calls {vol_note}{turn_note}")
+    if is_agentic and not config._turns_explicit:
+        console.print(
+            "  [bold yellow]⚑ This looks agentic[/bold yellow] [dim]— it has agent loops, so each "
+            "loop call site fires MANY times per task, re-sending the system prompt + tools every "
+            "turn. The number above is a [bold]per-turn floor[/bold]; real cost ≈ turns-per-run × it. "
+            "Turns-per-run isn't in the code — pass [bold]--turns-per-task[/bold] for a real number, "
+            "or run the full audit to measure it from traces.[/dim]"
+        )
     if fshare >= 1:
         console.print(
             f"  [bold yellow]⚑ {fshare:.0f}% of that runs on flagship models[/bold yellow]"
@@ -198,14 +227,12 @@ def estimate(
             f"\n[dim]{untraced} of {len(rows)} call sites build their prompt at runtime, so this is a "
             f"lower bound — connect Helicone/Langfuse/OTel for measured spend.[/dim]"
         )
-    # Orchestration risks in agent graphs (LangGraph): loops with no cap, dead
-    # branches. Candidate flags — the full audit proves and fixes them.
-    from erabot._engine.orchestration_scan import scan_orchestration
-    oflags = scan_orchestration(files)
+    # Orchestration risks in agent graphs (LangGraph), already scanned up top:
+    # loops with no cap, dead branches. Candidate flags — the paid audit proves & fixes.
     if oflags:
         console.print(
             f"\n  ⚑ [bold]{len(oflags)}[/bold] orchestration risk(s) in your agent graph "
-            f"(unbounded loops / missing caps). The full audit proves & fixes them."
+            f"(uncapped loops / missing caps / dead branches). The full audit proves & fixes them."
         )
 
     console.print(
