@@ -34,3 +34,15 @@ def test_images_generate_still_flagged_ts():
 
 def test_chat_model_invoke_still_flagged_ts():
     assert _m("const r = await chatModel.invoke(messages);\n") == ["invoke"]
+
+
+def test_chrome_sendmessage_not_flagged_ts():
+    # chrome.runtime.sendMessage / tabs.sendMessage are extension messaging, not LLM
+    assert detect_llm_calls("x.js", "chrome.runtime.sendMessage({action: X});\n") == []
+    assert detect_llm_calls("x.js", "tabs.sendMessage(id, {msg});\n") == []
+
+
+def test_gemini_chat_sendmessage_still_flagged_ts():
+    # the real target: Gemini chat.sendMessage(...)
+    assert _m("const r = await chat.sendMessage('hi');\n") == ["sendMessage"]
+    assert _m("const r = await chatSession.sendMessage(msg);\n") == ["sendMessage"]

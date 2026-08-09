@@ -41,6 +41,7 @@ patterns produced — measured, then removed:
 | `client.files.create/list/retrieve` | file management, no inference | drop non-inference methods + namespaces |
 | `model.count_tokens(...)` | local token counting | removed from the pattern |
 | Text after an em-dash/emoji | byte-offset vs. char-offset slicing corrupted call text | slice `node.text`, not `content[byte:byte]` |
+| `chrome.runtime.sendMessage(...)` | browser-extension messaging, not Gemini `chat.sendMessage()` | keep `sendMessage` only for LLM-ish receivers |
 
 Across the corpus these false positives were **~68% of all raw detections** —
 so the cleanup roughly tripled precision.
@@ -52,10 +53,15 @@ TypeScript/JavaScript detection works end-to-end (langchainjs: 84 sites across
 
 ## Honest limits
 
-- **Precision, not perfection.** ~97% on the sample means roughly 1 in 30 sites
-  may still be a false positive. The known residuals are framework *internals*
-  (e.g. LangChain's own `Runnable.invoke` plumbing) that only appear when you
-  scan a framework's source, not a normal app.
+- **Precision is measured, and it varies by codebase — it is not a single
+  universal number.** ~97% held on our corpus, but a scan of Onyx (which ships a
+  browser extension) initially hit ~77% because `chrome.runtime.sendMessage`
+  collided with the Gemini `chat.sendMessage()` pattern — a false-positive class
+  the corpus didn't contain. We gated it and Onyx recovered to ~95%. New real
+  codebases can surface new patterns; the fix-and-remeasure loop is how they're
+  closed. The known residuals are also framework *internals* (e.g. LangChain's
+  own `Runnable.invoke` plumbing) that only appear when scanning a framework's
+  source, not a normal app.
 - **Recall is measured only on unambiguous direct-SDK calls** (100% there).
   Calls hidden behind custom wrappers or dynamic dispatch aren't counted here —
   those are harder and are where the paid engine's LLM backstop helps.

@@ -283,7 +283,10 @@ def _ambiguous_method_is_nonllm(method_name: str, call_text: str) -> bool:
         if comps & _LLM_RECV_COMPONENTS:
             return False  # llm_with_tools, chat_model — LLM signal wins over "tools"
         return bool(comps & _INVOKE_DENY_COMPONENTS)
-    if method_name in ("complete", "acomplete"):
+    # complete/acomplete collide with shell-completion; sendMessage (Gemini
+    # chat.sendMessage) collides with chrome.runtime.sendMessage / tabs.sendMessage
+    # / EventEmitter. Keep only for an LLM-ish receiver.
+    if method_name in ("complete", "acomplete", "sendMessage"):
         recv = _receiver_before(call_text, method_name)
         if not recv:
             return False
