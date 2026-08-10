@@ -62,6 +62,21 @@ def test_range_name_plus_one_keeps_band():
     assert d["calls_per_task"] == 4 and d["basis"] == "loop"
 
 
+def test_large_range_is_capped():
+    # a big batch/data loop is volume, not agent turns — cap the multiplier so one
+    # `range(10000)` site doesn't blow up (and dominate) the whole estimate.
+    assert est("for i in range(10000):\n    r = agent.run(x)\n", 2)["calls_per_task"] == 50
+    assert est("for i in range(500):\n    r = llm.invoke(x)\n", 2)["calls_per_task"] == 50
+
+
+def test_plausible_range_uncapped():
+    assert est("for i in range(25):\n    r = agent.run(x)\n", 2)["calls_per_task"] == 25
+
+
+def test_absurd_explicit_bound_capped():
+    assert est("r = Runner.run(agent, data, max_turns=9999)\n", 1)["calls_per_task"] == 50
+
+
 def test_explicit_bound_on_call_still_wins():
     code = "r = Runner.run(agent, data, max_turns=5)\n"
     assert est(code, 1)["calls_per_task"] == 5

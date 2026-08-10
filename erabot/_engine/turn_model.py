@@ -16,6 +16,16 @@ _BOUND_RE = re.compile(
 _LOOP_RE = re.compile(r"^\s*(for|while)\b")
 _LOOP_DEFAULT = 4      # conservative point estimate for an unbounded agent loop
 _LOOP_BAND = (2, 8)    # low/high band for an unbounded loop
+# Sanity ceiling on inferred turns-per-task. Agent loops realistically top out in
+# the low tens; a larger bound (range(10000), max_turns=9999) is almost always a
+# batch/data loop — that's call VOLUME, not agent turns, and multiplying per-site
+# cost by it produces an absurd, dominating estimate. Cap it; real turn counts
+# need traces anyway.
+_MAX_INFERRED_TURNS = 50
+
+
+def _cap(n: int) -> int:
+    return min(int(n), _MAX_INFERRED_TURNS)
 
 
 def _indent(line: str) -> int:
@@ -210,7 +220,7 @@ def estimate_calls_per_task(code: str, call_line: int, end_line: int | None = No
     #    — searched across the full (comment/string-stripped) call span.
     m = _BOUND_RE.search(call_span)
     if m:
-        n = max(1, int(m.group(2)))
+        n = _cap(max(1, int(m.group(2))))
         return {"calls_per_task": n, "basis": f"config:{m.group(1)}", "low": 1, "high": n}
     # 2) bound on the call receiver's CONSTRUCTION (receiver-matched, anywhere in file) —
     #    only attributed when the constructed var IS this call's receiver, using the
@@ -221,6 +231,7 @@ def estimate_calls_per_task(code: str, call_line: int, end_line: int | None = No
                  if t[0] <= call_line]
         if cands:
             _line, name, n = max(cands, key=lambda t: t[0])
+            n = _cap(n)
             return {"calls_per_task": n, "basis": f"config:{name}@construction",
                     "low": 1, "high": n}
     # 3) is the call actually INSIDE an enclosing for/while (by scope)?
@@ -230,6 +241,7 @@ def estimate_calls_per_task(code: str, call_line: int, end_line: int | None = No
         # can; otherwise fall back to the conservative band.
         bound = _loop_range_bound(header, code or "")
         if bound is not None:
+            bound = _cap(bound)
             return {"calls_per_task": bound, "basis": "loop:range", "low": 1, "high": bound}
         return {"calls_per_task": _LOOP_DEFAULT, "basis": "loop",
                 "low": _LOOP_BAND[0], "high": _LOOP_BAND[1]}
