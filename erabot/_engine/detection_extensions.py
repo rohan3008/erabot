@@ -31,6 +31,9 @@ _RECV_DENY = {
     "thread", "process", "pool", "executor", "task", "job", "worker", "queue",
     "subprocess", "os", "sys", "router", "self", "cls", "test", "unittest",
     "pytest", "db", "session", "cursor", "browser", "page", "driver",
+    # event/callback dispatch — handler.invoke, dispatcher.invoke, emitter.emit
+    "handler", "handlers", "callback", "callbacks", "listener", "dispatcher",
+    "emitter", "hook", "hooks", "middleware", "event", "events",
 }
 # Tool/retrieval API receivers — .invoke() on these is not a model call.
 _RECV_DENY_SUFFIX = re.compile(r"(api|tool|tools|retriever|search|scraper|parser)$", re.I)

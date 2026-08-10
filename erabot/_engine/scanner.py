@@ -248,6 +248,9 @@ def _is_nonllm_query(method_name: str, call_text: str) -> bool:
 _INVOKE_DENY_COMPONENTS = frozenset({
     "tool", "tools", "search", "retriever", "parser", "scraper", "api",
     "loader", "splitter",
+    # event/callback dispatch — handler.invoke, dispatcher.invoke, etc.
+    "handler", "handlers", "callback", "callbacks", "listener", "dispatcher",
+    "emitter", "hook", "hooks", "middleware", "event", "events",
 })
 # .complete/.acomplete is LlamaIndex `llm.complete(...)` but collides with common
 # non-LLM methods (shtab.complete shell-completion, futures). Keep it only for an
@@ -396,6 +399,12 @@ def detect_llm_calls(file_path: str, content: str) -> list[dict]:
         provider = _infer_provider(call_text, scoped_captures)
         method_name = _extract_method_name_for_node(node, captures)
 
+        # A PascalCase method is a class/config constructor, not an LLM API call:
+        # genai.types.GenerateContentConfig(...), genai.GenerativeModel(...). Real
+        # LLM API methods are never PascalCase. (The SDK-module pattern otherwise
+        # matches any call under a known SDK namespace.)
+        if method_name[:1].isupper():
+            continue
         # Drop data-store .query()/.aquery() (Qdrant/pandas/SQL), keep LLM engines.
         if _is_nonllm_query(method_name, call_text):
             continue
