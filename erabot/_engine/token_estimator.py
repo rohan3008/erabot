@@ -618,6 +618,9 @@ def calculate_finding_cost(
         "file_path": finding.get("file_path", ""),
         "line": finding.get("line", 0),
         "model": model,
+        # True only when a model literal was found in the code (not a provider
+        # default). Callers use this to know whether the model is real or guessed.
+        "model_detected_explicitly": model_detected_explicitly,
         "provider": provider,
         "input_tokens": input_tokens,
         "completion_tokens": completion_tokens,

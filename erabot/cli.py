@@ -179,6 +179,7 @@ def estimate(
     # --turns-per-task overrides it. See turn_model.
     from erabot._engine.turn_model import estimate_calls_per_task
     rows, total, flagship_total, traced_sites = [], 0.0, 0.0, 0
+    resolved_total, resolved_sites = 0.0, 0
     loop_sites, inferred_turns = 0, []
     for c in calls:
         est = calculate_finding_cost(c, config)          # config turns=explicit or 1
@@ -193,20 +194,35 @@ def estimate(
         if site_turns > 1:
             loop_sites += 1
             inferred_turns.append(site_turns)
-        model = est.get("model") or c.get("model") or ""
+        # A model is "known" only when a literal was found in code — not when the
+        # cost engine fell back to a provider default. Show the real model, else
+        # label it unresolved (keeps the table honest and the flagship-share sound).
+        model_known = bool(est.get("model_detected_explicitly"))
+        model = (est.get("model") or c.get("model") or "") if model_known else ""
         if not model or model.lower() in ("unknown", "?"):
             model = "model unresolved"
         in_tok = int(est.get("input_tokens", 0) or 0)
         if in_tok > 60:  # heuristic: real prompt content was traced, not just the code snippet
             traced_sites += 1
         total += mc
-        if _is_flagship(model):
-            flagship_total += mc
+        # Flagship-share is only meaningful over spend whose MODEL we actually
+        # resolved. Most real code sets the model at runtime, so an unresolved
+        # site is neither flagship nor a reliable denominator — track resolved
+        # spend separately so the % carries its own confidence.
+        if model_known:
+            resolved_sites += 1
+            resolved_total += mc
+            if _is_flagship(model):
+                flagship_total += mc
         rows.append({"file": str(c.get("file_path", "")), "line": c.get("line"),
                      "provider": c.get("provider") or "?", "model": model,
                      "mo": mc, "traced": in_tok > 60, "turns": site_turns, "basis": basis})
     rows.sort(key=lambda r: r["mo"], reverse=True)
-    fshare = (flagship_total / total * 100) if total else 0.0
+    # % of flagship spend AMONG sites with a resolved model (not among all spend).
+    fshare = (flagship_total / resolved_total * 100) if resolved_total else 0.0
+    resolution_rate = (resolved_sites / len(rows)) if rows else 0.0
+    # Trust the flagship split only when enough sites have a known model.
+    flagship_reliable = resolution_rate >= 0.25 and resolved_sites >= 3
     # Agentic if any call site loops (statically-inferred turns > 1) or a LangGraph
     # loop flag fired — framework-agnostic, not LangGraph-only.
     is_agentic = is_agentic or loop_sites > 0
@@ -219,6 +235,9 @@ def estimate(
             "call_sites": len(calls), "files": len(files),
             "estimated_monthly_usd": round(total, 2), "calls_per_month_per_site": resolved_calls,
             "volume_assumed": not explicit_volume, "flagship_spend_pct": round(fshare, 1),
+            "flagship_share_reliable": flagship_reliable,
+            "model_resolution_rate": round(resolution_rate, 2),
+            "resolved_model_sites": resolved_sites,
             "sites_with_traced_prompts": traced_sites,
             "agentic": is_agentic,
             "turns_per_task": turns if config._turns_explicit else avg_turns,
@@ -249,10 +268,17 @@ def estimate(
             "them. Static code can't show the exact turn count, though — pass [bold]--turns-per-task[/bold] "
             "for your real number, or run the full audit to measure it from traces.[/dim]"
         )
-    if fshare >= 1:
+    if flagship_reliable and fshare >= 1:
         console.print(
-            f"  [bold yellow]⚑ {fshare:.0f}% of that runs on flagship models[/bold yellow]"
-            " [dim]— prime downgrade candidates (the full audit says which are safe to switch)[/dim]"
+            f"  [bold yellow]⚑ {fshare:.0f}% of identifiable spend runs on flagship models[/bold yellow]"
+            f" [dim]— prime downgrade candidates (model resolved at {resolution_rate*100:.0f}% of sites; "
+            f"the full audit says which are safe to switch)[/dim]"
+        )
+    elif resolution_rate < 0.25:
+        console.print(
+            f"  [dim]The model is chosen at runtime for {(1 - resolution_rate) * 100:.0f}% of call sites, so a "
+            f"reliable flagship-model split can't be read from code alone — connect Helicone/Langfuse/OTel "
+            f"for the real breakdown.[/dim]"
         )
     console.print(
         f"  [dim]{len(calls)} candidate call sites across {len(files)} files — a fast static pass; "
