@@ -9,6 +9,8 @@ pipx install erabot        # or: pip install erabot
 erabot estimate .
 ```
 
+_Requires Python ≥ 3.10 and a recent pip (`pip install --upgrade pip`)._
+
 ```
   148 LLM call sites across 92 files
   Estimated $2,140/mo at 10,000 calls/mo per site (assumed — pass --calls-per-month for your real volume)
