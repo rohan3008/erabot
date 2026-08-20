@@ -5,9 +5,8 @@
 Most "LLM cost" tools count tokens. `erabot` also reads your agent's **orchestration** — the LangGraph loops and branches where cost actually runs away — and flags the ones with no cap set. Plus the usual: every LLM call site (OpenAI, Anthropic, Gemini, LangChain, LlamaIndex…) and its estimated monthly cost. Runs **entirely on your machine** — no upload, no signup, no account.
 
 ```bash
-pipx install git+https://github.com/rohan3008/erabot   # installs from source today
+pipx install erabot        # or: pip install erabot
 erabot estimate .
-# PyPI release coming — then: pipx install erabot  (or: pip install erabot)
 ```
 
 _Requires Python ≥ 3.10 and a recent pip (`pip install --upgrade pip`)._
