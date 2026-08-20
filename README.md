@@ -1,5 +1,10 @@
 # erabot
 
+[![PyPI](https://img.shields.io/pypi/v/erabot)](https://pypi.org/project/erabot/)
+[![Python](https://img.shields.io/pypi/pyversions/erabot)](https://pypi.org/project/erabot/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Downloads](https://img.shields.io/pypi/dm/erabot)](https://pypi.org/project/erabot/)
+
 **Find the cost risks in your AI agent's code — the runaway loops and missing caps that token counters miss. Locally, in seconds.**
 
 Most "LLM cost" tools count tokens. `erabot` also reads your agent's **orchestration** — the LangGraph loops and branches where cost actually runs away — and flags the ones with no cap set. Plus the usual: every LLM call site (OpenAI, Anthropic, Gemini, LangChain, LlamaIndex…) and its estimated monthly cost. Runs **entirely on your machine** — no upload, no signup, no account.
