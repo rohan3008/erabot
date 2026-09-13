@@ -1,0 +1,200 @@
+{
+  "summary": {
+    "repos_graded": 10,
+    "audits_errored": 0,
+    "recall": 1.0,
+    "planted": 9,
+    "found": 9,
+    "false_positives": 12,
+    "findings_total": 21,
+    "precision_proxy": 0.429,
+    "null_repos_clean": 2,
+    "null_repos_total": 2,
+    "invariant_violations": 0,
+    "category_stability_jaccard": 0.25,
+    "total_agent_cost_usd": 5.52
+  },
+  "per_repo": [
+    {
+      "repo": "01-clean-api",
+      "planted": 0,
+      "found": 0,
+      "missed": 0,
+      "fp_count": 0,
+      "findings_total": 0,
+      "identified_usd": 0,
+      "spend_usd": 0.0,
+      "invariant_ok": true,
+      "stopped_reason": "completed",
+      "agent_cost_usd": 0.2909,
+      "categories": []
+    },
+    {
+      "repo": "02-trivial-classify",
+      "planted": 1,
+      "found": 1,
+      "missed": 0,
+      "fp_count": 0,
+      "findings_total": 1,
+      "identified_usd": 1.97,
+      "spend_usd": 2.1,
+      "invariant_ok": true,
+      "stopped_reason": "completed",
+      "agent_cost_usd": 0.5483,
+      "categories": [
+        "model_mismatch"
+      ]
+    },
+    {
+      "repo": "03-uncached-faq",
+      "planted": 1,
+      "found": 1,
+      "missed": 0,
+      "fp_count": 1,
+      "findings_total": 2,
+      "identified_usd": 245.1,
+      "spend_usd": 245.1,
+      "invariant_ok": true,
+      "stopped_reason": "completed",
+      "agent_cost_usd": 0.797,
+      "categories": [
+        "model_mismatch",
+        "oversized-context"
+      ]
+    },
+    {
+      "repo": "04-agent-loop",
+      "planted": 1,
+      "found": 1,
+      "missed": 0,
+      "fp_count": 3,
+      "findings_total": 4,
+      "identified_usd": 195.0,
+      "spend_usd": 195.0,
+      "invariant_ok": true,
+      "stopped_reason": "completed",
+      "agent_cost_usd": 0.6487,
+      "categories": [
+        "conversation-history-bloat",
+        "model_mismatch",
+        "over-generation",
+        "turns-per-task"
+      ]
+    },
+    {
+      "repo": "05-reembed",
+      "planted": 1,
+      "found": 1,
+      "missed": 0,
+      "fp_count": 1,
+      "findings_total": 2,
+      "identified_usd": 0.29,
+      "spend_usd": 0.3,
+      "invariant_ok": true,
+      "stopped_reason": "completed",
+      "agent_cost_usd": 0.5663,
+      "categories": [
+        "batching",
+        "embedding-waste"
+      ]
+    },
+    {
+      "repo": "06-multi-issue",
+      "planted": 2,
+      "found": 2,
+      "missed": 0,
+      "fp_count": 1,
+      "findings_total": 3,
+      "identified_usd": 130.84,
+      "spend_usd": 130.84,
+      "invariant_ok": true,
+      "stopped_reason": "completed",
+      "agent_cost_usd": 0.7091,
+      "categories": [
+        "context-bloat",
+        "model_mismatch",
+        "over-generation"
+      ]
+    },
+    {
+      "repo": "07-batch-miss",
+      "planted": 1,
+      "found": 1,
+      "missed": 0,
+      "fp_count": 3,
+      "findings_total": 4,
+      "identified_usd": 0.1,
+      "spend_usd": 0.12,
+      "invariant_ok": true,
+      "stopped_reason": "completed",
+      "agent_cost_usd": 0.6658,
+      "categories": [
+        "batching",
+        "dedup",
+        "model_mismatch",
+        "over-generation"
+      ]
+    },
+    {
+      "repo": "08-eval-frontier",
+      "planted": 1,
+      "found": 1,
+      "missed": 0,
+      "fp_count": 2,
+      "findings_total": 3,
+      "identified_usd": 766.0,
+      "spend_usd": 766.0,
+      "invariant_ok": true,
+      "stopped_reason": "completed",
+      "agent_cost_usd": 0.5212,
+      "categories": [
+        "batching",
+        "model_mismatch",
+        "over-generation"
+      ]
+    },
+    {
+      "repo": "09-double-call",
+      "planted": 1,
+      "found": 1,
+      "missed": 0,
+      "fp_count": 1,
+      "findings_total": 2,
+      "identified_usd": 55.95,
+      "spend_usd": 67.14,
+      "invariant_ok": true,
+      "stopped_reason": "completed",
+      "agent_cost_usd": 0.5244,
+      "categories": [
+        "model_mismatch",
+        "redundant-call"
+      ]
+    },
+    {
+      "repo": "10-efficient-llm",
+      "planted": 0,
+      "found": 0,
+      "missed": 0,
+      "fp_count": 0,
+      "findings_total": 0,
+      "identified_usd": 0,
+      "spend_usd": 0.12,
+      "invariant_ok": true,
+      "stopped_reason": "completed",
+      "agent_cost_usd": 0.251,
+      "categories": []
+    }
+  ],
+  "variance": {
+    "run1": [
+      "context-bloat",
+      "model_mismatch",
+      "over-generation"
+    ],
+    "run2": [
+      "model_mismatch",
+      "oversized-context"
+    ],
+    "jaccard": 0.25
+  }
+}
