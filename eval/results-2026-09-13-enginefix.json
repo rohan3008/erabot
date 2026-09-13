@@ -1,0 +1,1135 @@
+{
+  "summary": {
+    "repos_graded": 10,
+    "audits_errored": 0,
+    "recall": 1.0,
+    "planted": 9,
+    "found": 9,
+    "false_positives": 13,
+    "findings_total": 22,
+    "precision_proxy": 0.409,
+    "null_repos_clean": 2,
+    "null_repos_total": 2,
+    "invariant_violations": 0,
+    "category_stability_jaccard": 1.0,
+    "total_agent_cost_usd": 5.65
+  },
+  "per_repo": [
+    {
+      "repo": "01-clean-api",
+      "planted": 0,
+      "found": 0,
+      "missed": 0,
+      "fp_count": 0,
+      "findings_total": 0,
+      "identified_usd": 0,
+      "spend_usd": 0.0,
+      "invariant_ok": true,
+      "stopped_reason": "completed",
+      "agent_cost_usd": 0.2872,
+      "categories": []
+    },
+    {
+      "repo": "02-trivial-classify",
+      "planted": 1,
+      "found": 1,
+      "missed": 0,
+      "fp_count": 1,
+      "findings_total": 2,
+      "identified_usd": 1.36,
+      "spend_usd": 1.45,
+      "invariant_ok": true,
+      "stopped_reason": "completed",
+      "agent_cost_usd": 0.6489,
+      "categories": [
+        "model_mismatch",
+        "over_generation"
+      ]
+    },
+    {
+      "repo": "03-uncached-faq",
+      "planted": 1,
+      "found": 1,
+      "missed": 0,
+      "fp_count": 1,
+      "findings_total": 2,
+      "identified_usd": 292.38,
+      "spend_usd": 292.38,
+      "invariant_ok": true,
+      "stopped_reason": "completed",
+      "agent_cost_usd": 0.7571,
+      "categories": [
+        "model_mismatch",
+        "oversized_context"
+      ]
+    },
+    {
+      "repo": "04-agent-loop",
+      "planted": 1,
+      "found": 1,
+      "missed": 0,
+      "fp_count": 3,
+      "findings_total": 4,
+      "identified_usd": 249.2,
+      "spend_usd": 427.23,
+      "invariant_ok": true,
+      "stopped_reason": "completed",
+      "agent_cost_usd": 0.8376,
+      "categories": [
+        "model_mismatch",
+        "other",
+        "over_generation",
+        "oversized_context"
+      ]
+    },
+    {
+      "repo": "05-reembed",
+      "planted": 1,
+      "found": 1,
+      "missed": 0,
+      "fp_count": 2,
+      "findings_total": 3,
+      "identified_usd": 0.45,
+      "spend_usd": 0.45,
+      "invariant_ok": true,
+      "stopped_reason": "completed",
+      "agent_cost_usd": 0.5778,
+      "categories": [
+        "batching",
+        "dedup",
+        "model_mismatch"
+      ]
+    },
+    {
+      "repo": "06-multi-issue",
+      "planted": 2,
+      "found": 2,
+      "missed": 0,
+      "fp_count": 1,
+      "findings_total": 3,
+      "identified_usd": 131.55,
+      "spend_usd": 131.82,
+      "invariant_ok": true,
+      "stopped_reason": "completed",
+      "agent_cost_usd": 0.536,
+      "categories": [
+        "model_mismatch",
+        "over_generation",
+        "oversized_context"
+      ]
+    },
+    {
+      "repo": "07-batch-miss",
+      "planted": 1,
+      "found": 1,
+      "missed": 0,
+      "fp_count": 2,
+      "findings_total": 3,
+      "identified_usd": 0.04,
+      "spend_usd": 0.06,
+      "invariant_ok": true,
+      "stopped_reason": "completed",
+      "agent_cost_usd": 0.5852,
+      "categories": [
+        "batching",
+        "model_mismatch",
+        "over_generation"
+      ]
+    },
+    {
+      "repo": "08-eval-frontier",
+      "planted": 1,
+      "found": 1,
+      "missed": 0,
+      "fp_count": 2,
+      "findings_total": 3,
+      "identified_usd": 1694.0,
+      "spend_usd": 1694.0,
+      "invariant_ok": true,
+      "stopped_reason": "completed",
+      "agent_cost_usd": 0.6226,
+      "categories": [
+        "batching",
+        "model_mismatch",
+        "over_generation"
+      ]
+    },
+    {
+      "repo": "09-double-call",
+      "planted": 1,
+      "found": 1,
+      "missed": 0,
+      "fp_count": 1,
+      "findings_total": 2,
+      "identified_usd": 47.5,
+      "spend_usd": 57.0,
+      "invariant_ok": true,
+      "stopped_reason": "completed",
+      "agent_cost_usd": 0.539,
+      "categories": [
+        "elimination",
+        "model_mismatch"
+      ]
+    },
+    {
+      "repo": "10-efficient-llm",
+      "planted": 0,
+      "found": 0,
+      "missed": 0,
+      "fp_count": 0,
+      "findings_total": 0,
+      "identified_usd": 0,
+      "spend_usd": 0.05,
+      "invariant_ok": true,
+      "stopped_reason": "completed",
+      "agent_cost_usd": 0.2607,
+      "categories": []
+    }
+  ],
+  "variance": {
+    "run1": [
+      "model_mismatch",
+      "over_generation",
+      "oversized_context"
+    ],
+    "run2": [
+      "model_mismatch",
+      "over_generation",
+      "oversized_context"
+    ],
+    "jaccard": 1.0
+  },
+  "raw_audits": {
+    "01-clean-api": {
+      "repo": "01-clean-api",
+      "call_sites": 0,
+      "files": 1,
+      "providers": {},
+      "total_monthly_spend_usd": 0.0,
+      "spend_basis": "estimated \u00b7 no runtime traffic connected",
+      "spend_breakdown": [
+        {
+          "label": "No LLM/AI API calls detected in scanned repo",
+          "monthly_cost_usd": 0.0
+        }
+      ],
+      "findings": [],
+      "fixes": [],
+      "tool_use": {
+        "reads": 1,
+        "searches": 2,
+        "traces": 0
+      },
+      "agent_cost_usd": 0.2872,
+      "turns": 7,
+      "wall_s": 63.0,
+      "summary": "`\u2605 Insight \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500`\nThe worklist tool (`list_call_sites`) and a raw content dump agree independently \u2014 that's the tell that this is a true negative, not a detector gap. When a scanner's structured index (call-site list) and an unstructured full-text sweep (regex over every line) both come back empty, the two methods are cross-checking each other rather than both relying on the same blind spot.\n`\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500`\n\n## Audit result: no LLM spend to find\n\n**What's actually in the repo:** one file, `app.py`, 10 lines total:\n```python\nfrom fastapi import FastAPI\napp = FastAPI()\n\n@app.get(\"/items/{item_id}\")\ndef read_item(item_id: int):\n    return {\"item_id\": item_id, \"price\": item_id * 2.5}\n\n@app.get(\"/health\")\ndef health():\n    return {\"ok\": True}\n```\nIt's a bare FastAPI service with two endpoints that do arithmetic and a healthcheck \u2014 zero calls to any LLM/AI API. I confirmed this two independent ways: `list_call_sites` returned 0 sites/0 files, and a regex sweep for `gemini|openai|anthropic|generate_content|chat.completions|GEMINI_API_KEY|genai` plus a full-file dump (`.*`) both came back with nothing beyond these 10 lines. (Note: this scanned repo is unrelated to the erabot.ai / tw-dash product described in this session's project CLAUDE.md \u2014 the MCP audit tools operate on a separate, minimal target file, not the actual tw-dash backend.)\n\n**Axis-by-axis accounting** (every axis ruled out \u2014 none apply, because there is no LLM call site at all to hang any of them on):\n- Caching, dedup, redundant/skippable calls, over-retrieval, batching, oversized/static context, tool-schema bloat, serialization waste, tool-response bloat, tool-output overflow, code-payload bloat, over-generation, conversation-history bloat, retry/error-loop, guardrail/judge overhead, embedding waste, n>1/speculative generation \u2014 all N/A: none of these can exist without an underlying model call, and none exists in this file.\n- model_mismatch, eliminate-the-call, reasoning-token waste, multimodal/image cost, prompt/context compression \u2014 same: no model invocation of any kind (no API key, SDK import, HTTP call, or prompt string) is present to mismatch, eliminate, or compress.\n- Agent-loop-only axes (inner-turn model uniformity, agent-memory re-injection) \u2014 **gated out**: no agent framework or hand-rolled agent loop is present (no LangGraph/CrewAI/AutoGen/OpenAI-Agents-SDK/LlamaIndex-agents/semantic-kernel, and no while/for loop feeding tool results back into a model). Ruled out per the gate instruction.\n\n**Repo cost:** `set_repo_cost` recorded **$0/month** \u2014 there is no LLM call path anywhere in the scanned tree to price, so the honest total spend (and total possible savings) is zero. No findings were emitted because there was nothing defensible to flag; a padded finding here would violate the evidence-gate discipline this audit is run under.",
+      "stopped_reason": "completed"
+    },
+    "02-trivial-classify": {
+      "repo": "02-trivial-classify",
+      "call_sites": 1,
+      "files": 1,
+      "providers": {
+        "openai": 1
+      },
+      "total_monthly_spend_usd": 1.45,
+      "spend_basis": "estimated \u00b7 no runtime traffic connected",
+      "spend_breakdown": [
+        {
+          "label": "moderate.py is_spam() gpt-4o calls",
+          "monthly_cost_usd": 1.45
+        }
+      ],
+      "findings": [
+        {
+          "title": "Frontier gpt-4o used for a bounded binary spam/ham classification",
+          "category": "model_mismatch",
+          "files": [
+            "moderate.py"
+          ],
+          "root_cause": "is_spam() (moderate.py:4-13) calls gpt-4o for a two-label yes/no classification task -- the system prompt is literally \"Reply only 'spam' or 'ham'.\" This is a bounded, objectively-checkable task that does not need frontier-tier reasoning. I attempted to verify a cheaper-model swap with shadow_verify(gpt-4o -> gpt-4o-mini, task_type=label) and an eliminate-the-call regex with verify_elimination; both came back INCONCLUSIVE in this sandbox because no live provider API keys are connected here (shadow_verify: \"cannot run the frontier gpt-4o... no proxy or substitute model is used\"; verify_elimination: failed with a missing ANTHROPIC_API_KEY error before it could even query the judge). So this finding is a well-evidenced code-level recommendation (task shape + pricing are certain) but NOT yet a production-verified swap -- re-run shadow_verify once live keys are configured before rolling out broadly. The model is hardcoded (no runtime router across providers), so there is only one frontier row to price: gpt-4o at $2.50/$10.00 per 1M in/out.",
+          "fix": "Swap model=\"gpt-4o\" to model=\"gpt-4o-mini\" ($0.15/$0.60 per 1M in/out, a 94% per-call cost cut at identical tokens/call) -- this is the conservative same-vendor cheaper tier for a 2-label classification task. Cheaper open-weight candidates (e.g. deepseek/deepseek-chat via OpenRouter) are also plausible for this task shape but were not reachable to shadow-test here. Alternative remedy considered: eliminate the call entirely with a keyword regex (spam messages are often keyword-heavy: \"free\", \"click here\", \"winner\", \"act now\", \"verify your password\", etc.) -- this could be cheaper still, but verify_elimination could not run in this sandbox, so do NOT ship the regex as apply-ready; validate agreement on real traffic (or once provider keys are available) before considering it over the mini-model swap.",
+          "monthly_savings_usd": 1.36,
+          "tokens_per_call": 52,
+          "calls_per_month": 10000,
+          "observed_calls": 0,
+          "shadow": {
+            "verdict": "INCONCLUSIVE",
+            "reason": "no live access to the frontier model gpt-4o",
+            "requested_models": [
+              "gpt-4o"
+            ],
+            "proxy": false,
+            "task": "Binary spam/ham classification of a short text message. The model must reply with exactly one word: 'spam' or 'ham'."
+          }
+        },
+        {
+          "title": "No max_tokens/stop cap on a single-word-expected completion",
+          "category": "over_generation",
+          "files": [
+            "moderate.py"
+          ],
+          "root_cause": "The chat.completions.create() call at moderate.py:6-12 sets no max_tokens and no stop sequence, even though the system prompt demands exactly one word (\"spam\" or \"ham\"). Nothing in the request structurally prevents a non-compliant or verbose completion (e.g. the model adding an explanation) from running long and being billed at gpt-4o's $10/1M output rate, the most expensive token type. I have no measured data on how often gpt-4o actually deviates from the one-word instruction on this repo's real traffic, so per the evidence-gate rule I am not assigning it a dollar figure -- this is a preventive, quality-neutral cap, not a currently-observed leak.",
+          "fix": "Add max_tokens=5 (and optionally stop=[\"\\n\"]) to the chat.completions.create() call. This does not change the output for any correctly-behaving response (a compliant answer is 1 token) -- it only bounds the tail-risk cost of a non-compliant, verbose completion. Quality-neutral, no shadow-verify needed.",
+          "monthly_savings_usd": 0.0,
+          "tokens_per_call": 52,
+          "calls_per_month": 10000,
+          "observed_calls": 0,
+          "shadow": null
+        }
+      ],
+      "fixes": [
+        {
+          "finding_title": "Frontier gpt-4o used for a bounded binary spam/ham classification",
+          "path": "moderate.py",
+          "explanation": "Swaps the frontier gpt-4o to gpt-4o-mini for this bounded 2-label classification task (~94% per-call cost cut at identical tokens/call), and bundles in the max_tokens=5 cap from the over_generation finding since both edits land on the same call. Re-run shadow_verify against real traffic once live provider keys are available -- this sandbox could not reach gpt-4o to confirm quality parity (INCONCLUSIVE, shadow_id=1).",
+          "diff": "--- a/moderate.py\n+++ b/moderate.py\n@@ -4,10 +4,11 @@\n def is_spam(text: str) -> bool:\n     \"\"\"Binary spam check \u2014 runs on gpt-4o for a yes/no answer.\"\"\"\n     resp = client.chat.completions.create(\n-        model=\"gpt-4o\",\n+        model=\"gpt-4o-mini\",\n         messages=[\n             {\"role\": \"system\", \"content\": \"Reply only 'spam' or 'ham'.\"},\n             {\"role\": \"user\", \"content\": text},\n         ],\n+        max_tokens=5,\n     )\n     return resp.choices[0].message.content.strip() == \"spam\"\n",
+          "shadow": {
+            "verdict": "INCONCLUSIVE",
+            "reason": "no live access to the frontier model gpt-4o",
+            "requested_models": [
+              "gpt-4o"
+            ],
+            "proxy": false,
+            "task": "Binary spam/ham classification of a short text message. The model must reply with exactly one word: 'spam' or 'ham'."
+          }
+        },
+        {
+          "finding_title": "Frontier gpt-4o used for a bounded binary spam/ham classification",
+          "path": "moderate.py",
+          "explanation": "Swaps the frontier gpt-4o to gpt-4o-mini for this bounded 2-label classification task (~94% per-call cost cut at identical tokens/call), and bundles in the max_tokens=5 cap from the over_generation finding since both edits land on the same call. shadow_verify could not reach gpt-4o in this sandbox (no live provider keys) so this ships UNVERIFIED -- re-run shadow_verify against real traffic before rollout.",
+          "diff": "--- a/moderate.py\n+++ b/moderate.py\n@@ -4,10 +4,11 @@\n def is_spam(text: str) -> bool:\n     \"\"\"Binary spam check \u2014 runs on gpt-4o for a yes/no answer.\"\"\"\n     resp = client.chat.completions.create(\n-        model=\"gpt-4o\",\n+        model=\"gpt-4o-mini\",\n         messages=[\n             {\"role\": \"system\", \"content\": \"Reply only 'spam' or 'ham'.\"},\n             {\"role\": \"user\", \"content\": text},\n         ],\n+        max_tokens=5,\n     )\n     return resp.choices[0].message.content.strip() == \"spam\"\n",
+          "shadow": null
+        }
+      ],
+      "tool_use": {
+        "reads": 1,
+        "searches": 4,
+        "traces": 0
+      },
+      "agent_cost_usd": 0.6489,
+      "turns": 30,
+      "wall_s": 207.9,
+      "summary": "Disregarding that last skill dispatch \u2014 it fired on a false match and isn't relevant here (the task is the erabot cost audit, not a knowledge-graph build). Returning to the audit, which is complete.\n\n## Audit summary \u2014 tw-dash (moderate.py)\n\nThis repo has exactly **one** detected LLM call site: `moderate.py:6`, a `gpt-4o` binary spam/ham classifier called from `is_spam()`. No agent framework, RAG, tool-calling, or multi-call pipeline exists anywhere in the repo (confirmed via repo-wide regex sweeps for LangGraph/CrewAI/AutoGen/AgentExecutor patterns, loops, `max_tokens`, `tools=`, `n=`, `stream=` \u2014 all zero matches). That shrank most of the checklist to quick, defensible rule-outs rather than deep dives, so here is every axis, accounted for:\n\n**Findings emitted (2):**\n1. **model_mismatch** \u2014 `gpt-4o` is overkill for a 2-label yes/no classification (`\"Reply only 'spam' or 'ham'.\"`). Recommended swap to `gpt-4o-mini` (94% cheaper per call, same tokens). I attempted `shadow_verify` (gpt-4o\u2192gpt-4o-mini) and `verify_elimination` (regex bypass) to validate this properly, but **both came back INCONCLUSIVE** \u2014 this sandbox has no live provider API keys, so neither the frontier model nor the judge could actually be called. I shipped the swap as an apply-ready patch anyway (task shape + pricing make it low-risk) but flagged it explicitly as **unverified** \u2014 re-run shadow_verify against real traffic before trusting it in prod. At the default assumption of 10,000 calls/month (no measured traffic connected) and ~52 tokens/call, this is \u2248$1.36/mo of the repo's \u2248$1.45/mo total spend.\n2. **over_generation** \u2014 no `max_tokens`/`stop` set despite expecting exactly one word out. Bundled a `max_tokens=5` cap into the same patch. Quality-neutral, but I withheld a dollar figure ($0) since I have no observed rate of verbose/non-compliant completions to size the tail-risk against (evidence-gate rule).\n\n**Axes ruled out (with reasons):**\n- **caching**: system prompt is 9 tokens \u2014 nowhere near the ~1,024-token provider minimum for prompt caching to help.\n- **dedup / batching**: no evidence of repeated identical inputs or bulk/loop usage anywhere in the repo; can't assume without observed traffic.\n- **over-retrieval (RAG)**: no retrieval code exists in this repo.\n- **tool-schema bloat / serialization / tool-response / tool-output overflow / code-payload bloat**: no `tools=` param, no structured JSON input, no agent loop feeding tool results back \u2014 none of this machinery exists here.\n- **conversation-history bloat**: each call is single-shot with no history array.\n- **turns-per-task / retry-loop / guardrail-judge overhead / inner-turn uniformity / agent-memory re-injection**: no agent loop or agent framework in this repo at all (confirmed by grep) \u2014 these axes are pure noise here.\n- **embedding waste / n>1 / reasoning-token waste / multimodal / prompt-compression**: no embeddings API, `n` unset (defaults to 1), not a reasoning model, no images, and the 9-token system prompt is too short to compress.\n\n**Repo total spend**: set to **$1.45/month**, basis: the single call site \u00d7 the default 10,000 calls/month assumption (no measured traffic connected) \u00d7 ~52 tokens/call at gpt-4o pricing \u2014 this is the entire repo's LLM spend since there is only one call site.\n\n\u2605 Insight \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n- The two shadow-verification tools failing with \"no provider keys\" is itself useful audit data: it means every dollar figure I gave you for the model-swap is a **code-level, pre-production estimate** \u2014 the honest move (per the audit's own rules) was to ship the patch but flag it unverified rather than silently presenting it as validated, since a fabricated \"SAFE\" verdict would be worse than no verdict.\n- Note the asymmetry in the two findings: model_mismatch got a real dollar estimate because the waste (frontier pricing vs. mini pricing) is a certain, mechanical fact regardless of traffic; over_generation got $0 because its savings depend on an *unobserved* failure mode (how often the model ignores the one-word instruction) \u2014 that's the evidence-gate discipline the audit spec insists on, and it's why the two categories are priced so differently even though both look \"quality-neutral\" on paper.\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500",
+      "stopped_reason": "completed"
+    },
+    "03-uncached-faq": {
+      "repo": "03-uncached-faq",
+      "call_sites": 1,
+      "files": 1,
+      "providers": {
+        "anthropic": 1
+      },
+      "total_monthly_spend_usd": 292.38,
+      "spend_basis": "estimated \u00b7 spend floor raised to reconcile with grounded per-call savings \u2014 connect runtime traffic (Helicone/Langfuse/OTel) for measured spend",
+      "spend_breakdown": [
+        {
+          "label": "duplicated policy text in system prompt (5,205 of 5,220 input tokens/call)",
+          "monthly_cost_usd": 156.15
+        },
+        {
+          "label": "user question input tokens",
+          "monthly_cost_usd": 0.45
+        },
+        {
+          "label": "completion/output tokens (answer generation)",
+          "monthly_cost_usd": 22.5
+        }
+      ],
+      "findings": [
+        {
+          "title": "System prompt repeats one sentence 400x \u2014 99.7% of the tokens sent on every call are pure duplication",
+          "category": "oversized_context",
+          "files": [
+            "faq.py"
+          ],
+          "root_cause": "POLICY_DOC (faq.py:4) is built as \"Refund policy: \" + (\"All refunds are processed within 14 days subject to review. \" * 400) and is sent verbatim as the `system` prompt on every call to answer_faq (faq.py:8-13). count_tokens confirms: the prefix is 5 tokens, each repeated sentence is 13 tokens, so the full doc is 5 + 13*400 = 5,205 tokens, while a single instance of the same content (prefix + one sentence) is only 18 tokens. The 400x repetition is literal duplicate text \u2014 it adds zero additional information to the model versus sending it once \u2014 so trimming it is fully quality-neutral (the model sees the exact same policy statement, just not repeated 400 times). This is distinct from the prompt-caching axis: caching would still pay to write/read 5,205 tokens per TTL window, whereas trimming removes the wasted tokens entirely and permanently, and requires no cache infrastructure.",
+          "fix": "Primary fix (ship this): collapse POLICY_DOC to a single instance of the sentence \u2014 see emit_fix. This cuts system-prompt tokens from 5,205 to 18 (-99.7%) with zero output change, since the model receives identical policy content either way.\nAlternative (only if the policy text is later legitimately expanded to real multi-topic documentation that must stay large): mark the static block with Anthropic prompt caching (cache_control: {type: \"ephemeral\"} on the system block) so repeat calls within the TTL window pay the ~0.1x cached-read rate instead of full price. Not recommended here specifically because after trimming the duplicate content, the block is only 18 tokens \u2014 far below the ~1,024-token minimum for prompt caching to have any effect, so caching would add complexity for no benefit once the duplication is fixed. Do the trim, not both.",
+          "monthly_savings_usd": 155.61,
+          "tokens_per_call": 5370,
+          "calls_per_month": 10000,
+          "observed_calls": 0,
+          "shadow": null
+        },
+        {
+          "title": "claude-sonnet-4 runs a bounded FAQ-answer task that a cheaper tier likely handles \u2014 UNVERIFIED (no live provider access)",
+          "category": "model_mismatch",
+          "files": [
+            "faq.py"
+          ],
+          "root_cause": "faq.py:9 hardcodes model=\"claude-sonnet-4\" ($3.00/$15.00 per 1M in/out) for a bounded, low-complexity task: answer a customer's refund question by restating a short, fixed policy statement. This is the kind of grounded, single-fact-lookup generation task where a much cheaper tier (e.g. claude-3-haiku, $0.25/$1.25 per 1M) often preserves quality. I attempted shadow_verify twice (old_model=\"claude-sonnet-4\" then \"claude-3-5-sonnet-20241022\", new_model=\"claude-haiku\"/\"claude-3-5-haiku-20241022\") \u2014 both returned INCONCLUSIVE: \"cannot run the frontier ... a real proof needs a key for that provider. No proxy or substitute model is used.\" This sandbox has no live Anthropic provider access, so the quality-preservation claim could NOT be measured (shadow_id=2 carries this inconclusive verdict). Per audit policy, an unverified quality-affecting swap must not ship as an apply-ready patch \u2014 the dollar figure below is a list-price estimate only, not a confirmed saving.",
+          "fix": "Do NOT apply this swap blindly. Re-run shadow_verify (task=\"answer refund-policy FAQ\", system_prompt=the policy sentence, 5-8 real customer questions, success_criteria=\"accurately reflects the 14-day/review-subject policy without inventing unstated terms\") once live Anthropic provider access is available, and only ship model=\"claude-sonnet-4\" -> model=\"claude-3-haiku\" at faq.py:9 if it comes back SAFE (>=90% quality retained).\nPer-model table (same tokens/call: 5,220 input incl. trimmed system prompt + question, 150 output; calls/mo=10,000; each row = swap to that vendor's cheaper tier, same volume):\n| your frontier model | from $/1M in-out | swap target | to $/1M in-out | monthly saving |\n|---|---|---|---|---|\n| gpt-4o | 2.50/10.00 | gpt-4o-mini | 0.15/0.60 | $136.77 |\n| gpt-4-turbo | 10.00/30.00 | gpt-4o-mini | 0.15/0.60 | $558.27 |\n| claude-sonnet-4 (this site) | 3.00/15.00 | claude-3-haiku | 0.25/1.25 | $164.18 |\n| claude-opus-4 | 15.00/75.00 | claude-3-haiku | 0.25/1.25 | $880.73 |\n| gemini-2.5-pro | 1.25/10.00 | gemini-2.0-flash | 0.10/0.40 | $74.43 |\nmonthly_savings_usd below is set to the conservative gpt-4o row per audit convention; this site's own actual swap (claude-sonnet-4 -> claude-3-haiku) would be $164.18/mo IF verified SAFE.",
+          "monthly_savings_usd": 136.77,
+          "tokens_per_call": 5370,
+          "calls_per_month": 10000,
+          "observed_calls": 0,
+          "shadow": {
+            "verdict": "INCONCLUSIVE",
+            "reason": "no live access to the frontier model claude-3-5-sonnet-20241022",
+            "requested_models": [
+              "claude-3-5-sonnet-20241022"
+            ],
+            "proxy": false,
+            "task": "Answer a customer's refund-policy FAQ question using a company policy document as the system prompt."
+          }
+        }
+      ],
+      "fixes": [
+        {
+          "finding_title": "System prompt repeats one sentence 400x \u2014 99.7% of the tokens sent on every call are pure duplication",
+          "path": "faq.py",
+          "explanation": "Removes the 400x literal repetition of the same sentence from the system prompt. The model receives the exact same policy content (just once instead of 400 times), so output is unaffected \u2014 this cuts system-prompt tokens from 5,205 to 18 per call with zero quality risk.",
+          "diff": "--- a/faq.py\n+++ b/faq.py\n@@ -1,7 +1,7 @@\n import anthropic\n client = anthropic.Anthropic()\n \n-POLICY_DOC = \"Refund policy: \" + (\"All refunds are processed within 14 days subject to review. \" * 400)\n+POLICY_DOC = \"Refund policy: All refunds are processed within 14 days subject to review.\"\n \n def answer_faq(question: str) -> str:\n     \"\"\"Sends the full 400-paragraph policy doc on every single question, uncached.\"\"\"\n",
+          "shadow": null
+        }
+      ],
+      "tool_use": {
+        "reads": 1,
+        "searches": 2,
+        "traces": 0
+      },
+      "agent_cost_usd": 0.7571,
+      "turns": 39,
+      "wall_s": 273.3,
+      "summary": "`\u2605 Insight \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500`\nThis repo is a single 14-line file with one call site, so the audit is small but the two findings illustrate a general principle: **duplication-within-a-prompt and cross-call caching are different waste axes with different fixes.** A naive auditor might reach for \"add prompt caching\" the moment they see a large static `system=` string sent every call. Here that would have been the *wrong* primary fix \u2014 the 5,205-token block is 400 copies of one 13-token sentence, so the right move is deleting the duplication (a 99.7% cut, zero cache infrastructure, zero quality risk), not paying Anthropic's cache-write premium to repeatedly store and re-read redundant tokens. Caching only becomes relevant for content that's large *and* genuinely non-repetitive \u2014 after trimming, this block (18 tokens) sits far below the ~1,024-token minimum where caching helps at all.\n\nThe other finding demonstrates why shadow-verification matters as a gate, not a formality: I could compute a plausible-looking $136-164/month \"saving\" from swapping to claude-3-haiku using nothing but the public pricing table, but this sandbox had no live Anthropic key, so `shadow_verify` correctly refused to fabricate a quality verdict and returned INCONCLUSIVE both times I tried. The tool's design \u2014 dropping unreachable candidates rather than faking their output \u2014 is what keeps a cost audit honest: a savings number without a quality check attached is a guess wearing a cost report's clothes.\n`\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500`\n\n## Audit summary \u2014 faq.py (1 call site, entire repo)\n\n**Total estimated spend: ~$179/month** (10,000 calls/mo default assumption \u2014 no connected traffic; claude-sonnet-4 at $3/$15 per 1M in/out; 5,220 input + 150 output tokens/call).\n\n**Findings shipped (2):**\n\n1. **Oversized static context \u2014 99.7% duplicate tokens** (`oversized_context`, **$155.61/mo**, apply-ready fix shipped). `POLICY_DOC` repeats the identical 13-token sentence 400 times (5,205 tokens) with zero informational gain over sending it once (18 tokens). Fixed by collapsing to a single instance \u2014 same policy content reaches the model, output is unaffected. Caching was considered and explicitly rejected as the fix here: post-trim the block is far under the ~1,024-token cache minimum, so caching would add complexity for nothing once the duplication is gone.\n\n2. **Model mismatch, UNVERIFIED** (`model_mismatch`, theoretical **$136.77/mo** conservative / **$164.18/mo** if this exact swap verifies). claude-sonnet-4 answers a bounded, single-fact FAQ task that a cheap tier (claude-3-haiku) plausibly handles \u2014 but `shadow_verify` came back **INCONCLUSIVE twice** (no live Anthropic provider key in this environment), so I did **not** ship an apply-ready patch, per the rule that quality-affecting swaps need a real SAFE verdict first. Reported with the full per-model table and the exact re-verification steps to run before applying.\n\n**Axes swept and ruled out (code-grounded, not just grepped):**\n- **Caching**: superseded by finding #1 \u2014 see above (the real fix is dedup-in-prompt, not caching).\n- **Dedup / redundant calls / batching**: single stateless call per user question, no loop, no repeated identical inputs observed or evidenced \u2014 n/a.\n- **Over-retrieval (RAG) / embeddings**: no retrieval step, no vector store, no embedding calls anywhere in the file.\n- **Tool-schema bloat / tool-response bloat / tool-output overflow**: `messages.create` has no `tools=` param \u2014 no tool use in this repo at all.\n- **Serialization / code-payload bloat**: no structured JSON or source code is sent in the prompt \u2014 just a policy string and a free-text question.\n- **Over-generation**: `max_tokens=400` is a modest cap for a short support answer, not evidence of runaway completions \u2014 not flagged.\n- **Conversation-history bloat**: single-turn, stateless call (`messages=[{\"role\":\"user\",\"content\":question}]`) \u2014 no history accumulates.\n- **Retry/error-loop, guardrail/judge overhead, n>1/speculative generation**: none present \u2014 single `messages.create` call, no retry wrapper, no judge/critique call, `n` not set.\n- **Reasoning-token waste**: claude-sonnet-4 called with no extended-thinking/reasoning params \u2014 not a reasoning-model call.\n- **Multimodal/image cost**: no image inputs anywhere.\n- **Prompt/context compression (LLMLingua-style)**: n/a post-fix \u2014 the \"long\" prompt was literal duplication (finding #1), not dense necessary prose needing algorithmic compression.\n- **Eliminate-the-call**: considered and ruled out \u2014 `question: str` is unconstrained free text, not a fixed label set or structured-extraction input, so a deterministic/templated replacement can't be safely verified without an unevidenced assumption that questions repeat; not emitted per the evidence gate.\n- **Agent-loop-only axes (inner-turn model uniformity, agent-memory re-injection)**: ruled out in one line \u2014 there is no agent framework, loop, or graph in this repo (confirmed via full-file `search_code` \u2014 it's 14 lines, one function, one call) \u2014 these axes don't apply.",
+      "stopped_reason": "completed"
+    },
+    "04-agent-loop": {
+      "repo": "04-agent-loop",
+      "call_sites": 1,
+      "files": 1,
+      "providers": {
+        "openai": 1
+      },
+      "total_monthly_spend_usd": 427.23,
+      "spend_basis": "estimated \u00b7 no runtime traffic connected",
+      "spend_breakdown": [
+        {
+          "label": "Routine vendor-detail turns (turns 2-7/8, growing unwindowed history)",
+          "monthly_cost_usd": 314.93
+        },
+        {
+          "label": "Final synthesis-memo turn (turn 8/8)",
+          "monthly_cost_usd": 89.05
+        },
+        {
+          "label": "Initial planning turn (turn 1/8)",
+          "monthly_cost_usd": 23.25
+        }
+      ],
+      "findings": [
+        {
+          "title": "Full conversation history resent unbounded every turn (no windowing)",
+          "category": "oversized_context",
+          "files": [
+            "agent.py"
+          ],
+          "root_cause": "agent.py:5-9: `history` starts as `[{\"role\":\"user\",\"content\":task}]` and every loop iteration appends the model's own last output as a new assistant turn, then passes the WHOLE list as `messages=history` on the next call (line 7). Nothing ever prunes or summarizes it, so input tokens grow ~linearly per turn and total tokens for an N-turn task grow ~O(N^2). Measured on a representative 8-turn multi-vendor research task (count_tokens, gpt-4o): input tokens per call were 106, 312, 587, 862, 1137, 1412, 1687, 1962 (sum 8065/task). Capping the messages sent to [task] + last 2 exchanges instead caps most later turns at ~381 tokens, for a capped total of ~2704/task -- a 5361 token/task (670 token/call average) reduction, with the model still seeing the original task plus its own most recent reasoning.",
+          "fix": "Send the model only the original task plus a bounded window of the most recent exchanges (e.g. `[history[0]] + history[-4:]`), or replace older turns with a short rolling summary. This is quality-neutral: the stale middle of the transcript is dropped, not the task or the model's current train of thought.",
+          "monthly_savings_usd": 134.0,
+          "tokens_per_call": 1290,
+          "calls_per_month": 80000,
+          "observed_calls": 0,
+          "shadow": null
+        },
+        {
+          "title": "No max_tokens cap -- verbose intermediate completions on every turn",
+          "category": "over_generation",
+          "files": [
+            "agent.py"
+          ],
+          "root_cause": "agent.py:7: `client.chat.completions.create(model=\"gpt-4o\", messages=history)` sets no `max_tokens` and no stop sequence. gpt-4o is a standard (non-reasoning) model, so a completion cap is safe and purely cuts verbosity, not hidden reasoning tokens. Measured with count_tokens: a representative mid-loop vendor-research turn ran 275 completion tokens written in full prose vs 83 tokens for an equally informative terse version of the same content (a 70% / 192-token cut) -- the model restates context and adds unrequested framing it doesn't need for an intermediate step. Applying that cut to the 6 per-vendor/detail turns per task (excludes the planning turn and the final memo turn, which legitimately need more room) saves ~192 completion tokens on 60,000 calls/month (10,000 tasks x 6 routine turns/task).",
+          "fix": "Add `max_tokens=300` to the `create()` call and add a short instruction (\"continue tersely, do not restate prior context\") for intermediate turns. Keep a higher/no cap for the final synthesis-memo turn if that step needs more room.",
+          "monthly_savings_usd": 115.2,
+          "tokens_per_call": 1290,
+          "calls_per_month": 60000,
+          "observed_calls": 0,
+          "shadow": null
+        },
+        {
+          "title": "Unbounded agent loop -- no max_iterations / early-exit cap",
+          "category": "other",
+          "files": [
+            "agent.py"
+          ],
+          "root_cause": "agent.py:6-10: `while True:` has no iteration cap, no timeout, and no step/recursion limit. The only exit condition is the literal substring \"TASK_COMPLETE\" appearing somewhere in the model's own generated output. If the model paraphrases instead of emitting that exact string, drifts off-task, or gets stuck in a loop of \"next I will...\" planning turns, there is no code-level circuit breaker -- the loop calls gpt-4o forever, and (per the companion oversized_context finding) each successive call is also more expensive as history grows. This is a cost-ceiling / reliability risk, not a guaranteed per-task cost today: a well-behaved task that completes in the typical ~8 turns costs the same whether or not a cap exists. There is no measured/observed rate of stalled loops in this codebase to size a guaranteed monthly dollar reduction, so this is reported as a risk-bounding fix rather than a baseline saving (evidence gate: unobserved input/behavior property).",
+          "fix": "Bound the loop explicitly, e.g. `for _ in range(MAX_ITERATIONS):` with MAX_ITERATIONS ~15, and return/raise clearly when the cap is hit instead of continuing silently. This turns an unbounded worst case into a known, budgetable ceiling per task.",
+          "monthly_savings_usd": 0.0,
+          "tokens_per_call": 1290,
+          "calls_per_month": 80000,
+          "observed_calls": 0,
+          "shadow": null
+        },
+        {
+          "title": "Same frontier model (gpt-4o) hardcoded for every loop turn, including routine continuation steps",
+          "category": "model_mismatch",
+          "files": [
+            "agent.py"
+          ],
+          "root_cause": "agent.py:7 hardcodes `model=\"gpt-4o\"` for every turn of the loop -- this IS a confirmed hand-rolled agent loop (while True feeding the model's own prior output back into `messages`), so the inner-turn-model-uniformity axis applies. Of the ~8 turns/task, only the first (planning) and last (final synthesis memo) plausibly need frontier-level holistic judgment; the middle ~6 turns are routine \"continue researching vendor X\" steps. I ran shadow_verify (old_model=gpt-4o, new_model=gpt-4o-mini, task_type=answer) with 8 representative routine-turn inputs and success criteria requiring accurate on-topic continuation without premature \"TASK_COMPLETE\". Result: shadow_id=1, verdict INCONCLUSIVE -- this environment has no live gpt-4o key, so no real frontier-vs-cheaper-model comparison could be run (the tool explicitly does not fake or substitute a proxy model). The theoretical cost delta if gpt-4o-mini is dropped in for those 6 turns/task (60,000 calls/month, ~999 input + 275 output tokens/call): gpt-4o costs $314.93/mo for that volume vs $18.90/mo on gpt-4o-mini -- a theoretical ~$296/mo ceiling -- but since quality parity is UNVERIFIED (not SAFE, not UNSAFE, simply unmeasured), this is not counted as a bankable saving.",
+          "fix": "Route by turn type: keep gpt-4o for the first (planning) and last (final memo/synthesis) turns, and try gpt-4o-mini for the routine continuation turns in between -- but re-run shadow verification with a live gpt-4o API key before shipping, since this session's shadow test came back INCONCLUSIVE rather than confirmed SAFE. Not shipped as an apply-ready patch for that reason.",
+          "monthly_savings_usd": 0.0,
+          "tokens_per_call": 1275,
+          "calls_per_month": 60000,
+          "observed_calls": 0,
+          "shadow": {
+            "verdict": "INCONCLUSIVE",
+            "reason": "no live access to the frontier model gpt-4o",
+            "requested_models": [
+              "gpt-4o"
+            ],
+            "proxy": false,
+            "task": "Autonomous multi-step research/analysis agent loop (no system prompt is set in code -- messages = [{\"role\":\"user\",\"content\":task}] and the loop just appends the model's own prior outputs as \"assistant\" turns). Each turn, the model reads the full history and must produce the NEXT intermediate step of a multi-part research task (continuing a vendor-by-vendor comparison), and must only emit the literal string TASK_COMPLETE once the entire final deliverable is done. This shadow test targets the ROUTINE intermediate turns (per-vendor research/detail steps), not the final synthesis/memo turn, which should stay on the frontier model."
+          }
+        }
+      ],
+      "fixes": [
+        {
+          "finding_title": "Full conversation history resent unbounded every turn (no windowing)",
+          "path": "agent.py",
+          "explanation": "Caps the messages sent each turn to the original task plus the last 4 history entries instead of the full ever-growing transcript, cutting the O(n^2) token growth while still giving the model the task and its most recent reasoning. Quality-neutral: no output content changes, only stale middle-of-transcript tokens are dropped.",
+          "diff": "--- a/agent.py\n+++ b/agent.py\n@@ -4,7 +4,8 @@\n def run_until_done(task: str) -> str:\n     history = [{\"role\": \"user\", \"content\": task}]\n     while True:\n-        resp = client.chat.completions.create(model=\"gpt-4o\", messages=history)\n+        windowed_history = [history[0]] + history[-4:]\n+        resp = client.chat.completions.create(model=\"gpt-4o\", messages=windowed_history)\n         out = resp.choices[0].message.content\n         history.append({\"role\": \"assistant\", \"content\": out})\n         if \"TASK_COMPLETE\" in out:\n",
+          "shadow": null
+        },
+        {
+          "finding_title": "No max_tokens cap -- verbose intermediate completions on every turn",
+          "path": "agent.py",
+          "explanation": "gpt-4o is a standard (non-reasoning) model, so capping completion length is safe and doesn't truncate hidden reasoning tokens. Bounds the expensive completion tokens per turn instead of letting the model generate open-ended verbose output on every step.",
+          "diff": "--- a/agent.py\n+++ b/agent.py\n@@ -4,7 +4,7 @@\n def run_until_done(task: str) -> str:\n     history = [{\"role\": \"user\", \"content\": task}]\n     while True:\n-        resp = client.chat.completions.create(model=\"gpt-4o\", messages=history)\n+        resp = client.chat.completions.create(model=\"gpt-4o\", messages=history, max_tokens=300)\n         out = resp.choices[0].message.content\n         history.append({\"role\": \"assistant\", \"content\": out})\n         if \"TASK_COMPLETE\" in out:\n",
+          "shadow": null
+        },
+        {
+          "finding_title": "Unbounded agent loop -- no max_iterations / early-exit cap",
+          "path": "agent.py",
+          "explanation": "Replaces the unbounded `while True` with a hard iteration cap so a stalled task (model never emits the literal \"TASK_COMPLETE\" string) can't loop -- and spend -- forever. Returns the last output instead of continuing silently once the cap is hit.",
+          "diff": "--- a/agent.py\n+++ b/agent.py\n@@ -1,11 +1,15 @@\n import openai\n client = openai.OpenAI()\n \n+MAX_ITERATIONS = 15\n+\n def run_until_done(task: str) -> str:\n     history = [{\"role\": \"user\", \"content\": task}]\n-    while True:\n+    out = None\n+    for _ in range(MAX_ITERATIONS):\n         resp = client.chat.completions.create(model=\"gpt-4o\", messages=history)\n         out = resp.choices[0].message.content\n         history.append({\"role\": \"assistant\", \"content\": out})\n         if \"TASK_COMPLETE\" in out:\n             return out\n+    return out  # hit MAX_ITERATIONS without a TASK_COMPLETE signal; stop instead of looping forever\n",
+          "shadow": null
+        }
+      ],
+      "tool_use": {
+        "reads": 1,
+        "searches": 1,
+        "traces": 0
+      },
+      "agent_cost_usd": 0.8376,
+      "turns": 29,
+      "wall_s": 445.1,
+      "summary": "## Audit summary \u2014 `tw-dash` (1 call site, `agent.py:7`, gpt-4o)\n\nThis is an 11-line hand-rolled agentic loop: `while True` calling `gpt-4o`, feeding the model's own prior output back into `messages` until the literal substring `\"TASK_COMPLETE\"` shows up. That confirmed agent-loop shape gated the two agent-loop-only axes into scope. Estimated baseline spend: **$427/mo** (10,000 tasks/mo \u00d7 ~8 turns/task, priced from real `count_tokens` measurements). Findings, all filed with apply-ready patches where safe:\n\n1. **Conversation-history bloat** (`oversized_context`, $134/mo) \u2014 the full transcript is resent every turn with no windowing, causing ~O(n\u00b2) token growth (measured: 106\u21921962 input tokens/turn over 8 turns). Fix: window to task + last N exchanges. Shipped.\n2. **No `max_tokens` cap** (`over_generation`, $115.20/mo) \u2014 gpt-4o (non-reasoning, safe to cap) runs unbounded on every intermediate turn; measured 275 vs 83 tokens for equally-informative verbose-vs-terse turns. Shipped.\n3. **Unbounded loop, no iteration cap** (`other`, $0 priced \u2014 tail-risk, not a guaranteed baseline saving; evidence gate) \u2014 exit depends entirely on a fragile string match with no circuit breaker. Shipped a `MAX_ITERATIONS` cap.\n4. **Frontier model hardcoded on every turn** (`model_mismatch`, $0 priced) \u2014 shadow-tested gpt-4o\u2192gpt-4o-mini on the 6 routine turns; came back **INCONCLUSIVE** (no live gpt-4o key in this environment, so no fake/proxy result was substituted). Theoretical ceiling ~$296/mo if verified, but not shipped as apply-ready since quality parity is unverified.\n\nRuled out with code-grounded reasons (no speculative findings to pad the checklist): caching (OpenAI auto-caches the byte-identical growing prefix already \u2014 no code change buys anything), dedup, redundant calls, over-retrieval/RAG (none exists), batching (single sequential task, not independent items), tool-schema/tool-response/tool-output/code-payload bloat (no `tools=` param, no function calling, no code sent), serialization waste (no structured data), retry/error-loop (no retry logic \u2014 distinct from the unbounded-loop finding above), guardrail/judge overhead, embedding waste, n>1, eliminate-the-call (open-ended generation, not deterministic), reasoning-token waste (gpt-4o isn't a reasoning model), multimodal (no images), prompt-compression (folded into finding #1, not double-billed), and agent-memory re-injection (no memory store distinct from the message list already covered in finding #1).\n\n\u2605 Insight \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\nThe two cheapest, zero-risk wins here (history windowing + max_tokens cap) total ~$249/mo \u2014 58% of the site's spend \u2014 with **zero output-quality risk**, because they're both quality-neutral: nothing about *what* the model needs to know or produce changes, only how much stale/verbose text gets billed. That's why the audit brief insists on sweeping quality-neutral fixes before touching model choice: they're bankable today, no shadow test required, while the biggest-looking number (the $296/mo model swap) is exactly the one that couldn't be verified safe in this sandboxed environment and was correctly *not* shipped.\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500",
+      "stopped_reason": "completed"
+    },
+    "05-reembed": {
+      "repo": "05-reembed",
+      "call_sites": 1,
+      "files": 1,
+      "providers": {
+        "openai": 1
+      },
+      "total_monthly_spend_usd": 0.45,
+      "spend_basis": "estimated \u00b7 spend floor raised to reconcile with grounded per-call savings \u2014 connect runtime traffic (Helicone/Langfuse/OTel) for measured spend",
+      "spend_breakdown": [
+        {
+          "label": "docs/ embedding indexing loop (index.py:9, text-embedding-3-large)",
+          "monthly_cost_usd": 0.33
+        }
+      ],
+      "findings": [
+        {
+          "title": "build_index() re-embeds every doc on every startup \u2014 no change detection or persisted cache",
+          "category": "dedup",
+          "files": [
+            "index.py"
+          ],
+          "root_cause": "index.py:4-11 build_index() is (per its own docstring) \"Called at every startup\" and unconditionally loops over every docs/**/*.md file, calling client.embeddings.create() for each one with no hash/mtime check against a prior run and no persisted vector store \u2014 vectors{} is rebuilt in memory from scratch and discarded when the process exits. Every restart re-pays the full embedding cost for documents that have not changed a single byte since the last run. This is code-grounded (explicit docstring + absence of any cache/hash lookup in the loop), but the DOLLAR magnitude depends on how often the service restarts relative to how often docs/ actually changes, which is not observable from this snapshot (no measured traffic, no deploy-frequency data) \u2014 so per the evidence-gate rule this is priced conditionally rather than with an assumed hit-rate.",
+          "fix": "Persist a content-hash \u2192 embedding cache (e.g. a local JSON/SQLite file, or the customer's existing key-value store) keyed by file path + sha256(content). On each build_index() call, hash the file, and only call embeddings.create() when the hash differs from the cached one; otherwise reuse the stored vector. This is quality-neutral \u2014 identical output, since an unchanged input always re-embeds to the same vector.",
+          "monthly_savings_usd": 0.0,
+          "tokens_per_call": 250,
+          "calls_per_month": 10000,
+          "observed_calls": 0,
+          "shadow": null
+        },
+        {
+          "title": "Per-document embedding calls in a loop \u2014 eligible for OpenAI Batch API's ~50% discount",
+          "category": "batching",
+          "files": [
+            "index.py"
+          ],
+          "root_cause": "index.py:7-9 loops over every markdown file and fires a separate synchronous client.embeddings.create() call per file. build_index() is a startup/indexing job (its docstring confirms it runs at process start, not on a live user request path), so it is exactly the latency-insensitive bulk workload the OpenAI Batch API targets: submit all docs as one JSONL batch job and get results back within a 24h SLA window at a documented ~50% price reduction versus the synchronous embeddings endpoint used today \u2014 with no change to the embedding values returned.",
+          "fix": "Replace the per-file synchronous embeddings.create() loop with a single OpenAI Batch API job: write one JSONL line per doc (custom_id=path, body={model, input:text}), upload via client.files.create(purpose='batch'), submit via client.batches.create(endpoint='/v1/embeddings', completion_window='24h'), then poll/retrieve and populate vectors{} from the batch output file. This is architectural (async submit+poll replaces the synchronous return-vectors-immediately shape of build_index()), so no local one-line patch is shipped here \u2014 pair it with the dedup/cache fix above so build_index() only needs to batch-embed docs that are new/changed, and can serve everything else from the persisted cache without waiting on the batch window at all.",
+          "monthly_savings_usd": 0.17,
+          "tokens_per_call": 250,
+          "calls_per_month": 10000,
+          "observed_calls": 0,
+          "shadow": null
+        },
+        {
+          "title": "text-embedding-3-large used where text-embedding-3-small may suffice (unverified \u2014 INCONCLUSIVE shadow test)",
+          "category": "model_mismatch",
+          "files": [
+            "index.py"
+          ],
+          "root_cause": "index.py:9 hardcodes model=\"text-embedding-3-large\" ($0.13/1M input tokens) for indexing plain documentation markdown. OpenAI's text-embedding-3-small ($0.02/1M, ~6.5x cheaper) is frequently sufficient for docs/FAQ-style semantic search. I attempted shadow_verify(text-embedding-3-large -> text-embedding-3-small); it returned INCONCLUSIVE \u2014 the harness has no live key for the frontier embedding model, so it could not replay real inputs through both and compare retrieval/similarity quality (shadow_verify's judge scores generated text, not embedding-space quality/recall, which is the actual risk of this swap). So this stays a prose recommendation, not a verified, apply-ready swap.",
+          "fix": "Do NOT blind-swap this. If the customer wants to pursue it: build a small retrieval eval (a handful of doc-relevant queries with known best-matching doc), embed the corpus with both models, and compare top-k recall before switching. Only change model=\"text-embedding-3-large\" to model=\"text-embedding-3-small\" on index.py:9 (and any query-side embedding call, not present in this snapshot) if recall holds.",
+          "monthly_savings_usd": 0.28,
+          "tokens_per_call": 250,
+          "calls_per_month": 10000,
+          "observed_calls": 0,
+          "shadow": {
+            "verdict": "INCONCLUSIVE",
+            "reason": "no live access to the frontier model text-embedding-3-large",
+            "requested_models": [
+              "text-embedding-3-large"
+            ],
+            "proxy": false,
+            "task": "Embed markdown documentation files for a semantic-search / RAG index, one file per embeddings.create call"
+          }
+        }
+      ],
+      "fixes": [
+        {
+          "finding_title": "build_index() re-embeds every doc on every startup \u2014 no change detection or persisted cache",
+          "path": "index.py",
+          "explanation": "Adds a persisted content-hash cache so unchanged docs are skipped on subsequent startups instead of re-embedded. Quality-neutral: identical embedding output for unchanged input, just fewer API calls.",
+          "diff": "--- a/index.py\n+++ b/index.py\n@@ -1,11 +1,30 @@\n-import openai, glob\n+import openai, glob, hashlib, json, os\n client = openai.OpenAI()\n+CACHE_PATH = \"embedding_cache.json\"\n+\n+def _load_cache():\n+    if os.path.exists(CACHE_PATH):\n+        with open(CACHE_PATH) as f:\n+            return json.load(f)\n+    return {}\n+\n+def _save_cache(cache):\n+    with open(CACHE_PATH, \"w\") as f:\n+        json.dump(cache, f)\n \n def build_index():\n-    \"\"\"Called at every startup \u2014 re-embeds EVERY document, changed or not.\"\"\"\n+    \"\"\"Called at every startup \u2014 only re-embeds documents whose content changed since the last run.\"\"\"\n+    cache = _load_cache()\n     vectors = {}\n     for path in glob.glob(\"docs/**/*.md\", recursive=True):\n         text = open(path).read()\n+        digest = hashlib.sha256(text.encode()).hexdigest()\n+        cached = cache.get(path)\n+        if cached and cached[\"hash\"] == digest:\n+            vectors[path] = cached[\"embedding\"]\n+            continue\n         emb = client.embeddings.create(model=\"text-embedding-3-large\", input=text)\n         vectors[path] = emb.data[0].embedding\n+        cache[path] = {\"hash\": digest, \"embedding\": vectors[path]}\n+    _save_cache(cache)\n     return vectors\n",
+          "shadow": null
+        }
+      ],
+      "tool_use": {
+        "reads": 2,
+        "searches": 3,
+        "traces": 1
+      },
+      "agent_cost_usd": 0.5778,
+      "turns": 19,
+      "wall_s": 266.5,
+      "summary": "## Audit Summary\n\nThis repo is a single 11-line file (`index.py`) with exactly one detected LLM call site: an OpenAI `text-embedding-3-large` call inside `build_index()`, looped once per markdown file under `docs/**/*.md`. There is no agent loop, no chat-completion call, no RAG query path, no tool-calling framework, and no docs/ corpus included in the scan \u2014 so most cost axes are cleanly ruled out rather than found.\n\n**Findings emitted (3):**\n1. **Dedup / embedding-cache (quality-neutral, shipped as apply-ready patch)** \u2014 `build_index()` re-embeds *every* doc on *every* startup by the code's own docstring, with zero hash/mtime check or persisted vector store. Fixed with a sha256-keyed JSON cache that skips re-embedding unchanged files \u2014 same output, fewer calls. Priced at `$0` per the evidence-gate rule: the *existence* of the waste is code-grounded, but the *dollar magnitude* depends on unmeasured restart-vs-doc-change frequency, so I didn't assume a hit rate.\n2. **Batching \u2192 OpenAI Batch API (quality-neutral, prose fix \u2014 too architectural for a local patch)** \u2014 the per-file loop is a startup/indexing job, exactly the latency-insensitive workload the Batch API's ~50% discount targets. ~$0.165/mo on the default-assumption volume; real architectural change (async submit+poll) so no diff shipped, but paired with finding 1 so only new/changed docs would ever need it.\n3. **model_mismatch: -large \u2192 -small (quality-affecting, UNVERIFIED)** \u2014 tried `shadow_verify`; it came back **INCONCLUSIVE** (no live frontier-embedding access, and the tool judges generated text, not embedding/retrieval quality anyway). Showed the real price delta (~6.5x cheaper, ~$0.28/mo) per the \"never hide the numbers\" rule, but shipped no patch \u2014 flagged as needing the customer's own retrieval-recall eval first.\n\n**Axes ruled out (code-grounded, not just grepped):**\n- *Caching (prompt-cache sense), tool-schema bloat, tool-response/output bloat, code-payload bloat, conversation-history bloat, guardrail/judge overhead, multi-agent fan-out, n>1/speculative* \u2014 none apply; there's no chat/completion call, no tools, no conversation, no agent framework anywhere in this file.\n- *Over-retrieval (RAG)* \u2014 only the indexing call is in scope; no query/retrieval call site exists here to audit top-k or reranking.\n- *Over-generation, reasoning-token waste* \u2014 N/A, this is an embeddings call (no completion tokens, no reasoning model).\n- *Retry/error-loop waste* \u2014 no try/except or backoff logic present.\n- *Serialization waste* \u2014 no structured JSON/table payload is embedded, just raw doc text.\n- *Multimodal/image, prompt/context compression* \u2014 no images; the embedded text is the object being indexed (not reusable overhead prose), so compression doesn't apply.\n- *Agent-loop-only axes (inner-turn uniformity, agent-memory re-injection)* \u2014 **no agentic loop or agent builder in this repo** (confirmed by reading the full 11-line file \u2014 no LangGraph/CrewAI/AutoGen/hand-rolled loop).\n\n**Total repo spend**: reported via `set_repo_cost` as ~$0.33/month (rounds to $0 in the tool's display) \u2014 this is a genuinely trivial-scale repo, so both the total and the savings found are small in absolute dollars even though the *dedup* and *batching* findings represent 100%/50% proportional waste on this call site.",
+      "stopped_reason": "completed"
+    },
+    "06-multi-issue": {
+      "repo": "06-multi-issue",
+      "call_sites": 1,
+      "files": 1,
+      "providers": {
+        "openai": 1
+      },
+      "total_monthly_spend_usd": 131.82,
+      "spend_basis": "estimated \u00b7 no runtime traffic connected",
+      "spend_breakdown": [
+        {
+          "label": "summarize_ticket system-prompt tokens (1000x-repeated STYLE_GUIDE, ~5,100 of the ~5,153 input tokens/call)",
+          "monthly_cost_usd": 127.37
+        },
+        {
+          "label": "summarize_ticket remaining input tokens (user ticket text, ~53 tokens/call)",
+          "monthly_cost_usd": 0.51
+        },
+        {
+          "label": "summarize_ticket completion tokens (~30 tokens/call, one-line answer)",
+          "monthly_cost_usd": 3.94
+        }
+      ],
+      "findings": [
+        {
+          "title": "System prompt is a 1000x-repeated no-op instruction (500x string, then doubled)",
+          "category": "oversized_context",
+          "files": [
+            "summarize.py"
+          ],
+          "root_cause": "Line 4 builds STYLE_GUIDE = \"Write concisely. \" * 500 (500 literal repetitions of an 18-char phrase), then line 11 sends STYLE_GUIDE + STYLE_GUIDE as the system message, doubling it to 1000 repetitions. Measured with count_tokens: 10 repetitions = 51 tokens, so 1000 repetitions \u2248 5,100 tokens, versus a single instance of the same instruction (\"Write concisely.\") = 5 tokens. Repeating an instruction 1000x conveys zero additional information to the model over stating it once -- it is pure input-token waste paid on every single call, with no effect on output quality (this is a duplication removal, not a rewrite of the instruction).",
+          "fix": "Collapse STYLE_GUIDE to a single instance and stop concatenating it with itself: `STYLE_GUIDE = \"Write concisely.\"` and system content = `STYLE_GUIDE` (not `STYLE_GUIDE + STYLE_GUIDE`). Considered alternative: prompt-caching the block instead of trimming it -- rejected, because the semantically-correct instruction is only ~5 tokens, far below the ~1,024-token minimum where any provider's prompt cache has effect; caching the bloated 5,100-token block would just discount waste at ~0.1-0.5x read-rate instead of removing it, so trimming is strictly better and is the single remedy for this waste.",
+          "monthly_savings_usd": 127.37,
+          "tokens_per_call": 5183,
+          "calls_per_month": 10000,
+          "observed_calls": 0,
+          "shadow": null
+        },
+        {
+          "title": "gpt-4o used for a bounded one-line ticket summary -- gpt-4o-mini is the cheaper-tier candidate (shadow test inconclusive, no live key)",
+          "category": "model_mismatch",
+          "files": [
+            "summarize.py"
+          ],
+          "root_cause": "summarize_ticket hardcodes model=\"gpt-4o\" for a single-sentence extractive summary of a support ticket -- a bounded, checkable task (capture the core issue in one line) with no multi-step reasoning, tool use, or long-context synthesis that would need a frontier model. I ran shadow_verify (task=one-line ticket summary, system_prompt=\"Write concisely.\", 8 representative tickets, old_model=gpt-4o, new_model=gpt-4o-mini, task_type=summarize) to get a measured quality verdict before recommending this -- it came back shadow_id=1 INCONCLUSIVE: this sandbox has no live API key for the frontier gpt-4o, so the ladder could not be replayed on the real model. This is NOT a verified-SAFE swap; it is a priced candidate pending live verification, shown transparently rather than hidden.",
+          "fix": "Pending a live shadow-verify pass with real gpt-4o access, try gpt-4o-mini first (same vendor, conservative). Arithmetic, shown at two baselines to avoid double-counting against the separate context-trim finding on this same call site: (a) standalone, on the CURRENT bloated ~5,153-input/30-completion-token call: gpt-4o $0.013182/call vs gpt-4o-mini $0.000791/call -> $0.012391/call x 10,000 calls/mo = $123.91/mo if applied alone. (b) incremental, AFTER the context-trim fix is applied (system prompt shrinks to ~5 tokens, call becomes ~58 input/30 completion tokens): gpt-4o $0.000445/call vs gpt-4o-mini $0.000027/call -> $0.000418/call x 10,000/mo = $4.18/mo additional. Since both fixes act on the same call site's tokens, the non-overlapping combined saving if BOTH ship is ~$127.37 + $4.18 = $131.55/mo (booked figure below uses the non-overlapping $4.18 to avoid billing the same tokens twice against the trim finding).",
+          "monthly_savings_usd": 4.18,
+          "tokens_per_call": 88,
+          "calls_per_month": 10000,
+          "observed_calls": 0,
+          "shadow": {
+            "verdict": "INCONCLUSIVE",
+            "reason": "no live access to the frontier model gpt-4o",
+            "requested_models": [
+              "gpt-4o"
+            ],
+            "proxy": false,
+            "task": "Summarize a customer support ticket into a single concise one-line summary suitable for a support dashboard/queue view."
+          }
+        },
+        {
+          "title": "No max_tokens/stop cap on a task defined as \"one line\" -- latent uncapped-output risk (no dollars booked, unverified)",
+          "category": "over_generation",
+          "files": [
+            "summarize.py"
+          ],
+          "root_cause": "The chat.completions.create call sets no max_tokens and no stop sequence, even though the task (\"One line summary: ...\") only needs a short completion. gpt-4o is a non-reasoning model here, so a cap would not truncate hidden reasoning tokens -- there is no quality-safety reason to leave it uncapped. However, I have no measured completion-token traffic for this site (get_measured_traffic returned nothing), so I cannot show that completions actually balloon beyond a normal one-line answer -- per the evidence gate, I am not booking speculative dollars against an unobserved input/output-distribution property.",
+          "fix": "Add a small defensive cap, e.g. max_tokens=40, to bound the tail risk of a verbose/rambling completion (occasional multi-sentence answers, added preambles like \"Summary:\", or repeated lines) without affecting the normal one-line output. Quality-neutral for the common case since the model already tends to answer in one line per the prompt; the cap only clips the rare outlier.",
+          "monthly_savings_usd": 0.0,
+          "tokens_per_call": 30,
+          "calls_per_month": 10000,
+          "observed_calls": 0,
+          "shadow": null
+        }
+      ],
+      "fixes": [
+        {
+          "finding_title": "System prompt is a 1000x-repeated no-op instruction (500x string, then doubled)",
+          "path": "summarize.py",
+          "explanation": "Removes the 500x string multiplication and the self-concatenation that doubled it to 1000x, cutting the system message from ~5,100 tokens to ~5 tokens per call with zero change to the instruction's meaning or the model's output.",
+          "diff": "--- a/summarize.py\n+++ b/summarize.py\n@@ -1,14 +1,14 @@\n import openai\n client = openai.OpenAI()\n \n-STYLE_GUIDE = \"Write concisely. \" * 500\n+STYLE_GUIDE = \"Write concisely.\"\n \n def summarize_ticket(ticket: str) -> str:\n-    \"\"\"gpt-4o for one-line summaries, with a 500x-duplicated style guide.\"\"\"\n+    \"\"\"gpt-4o for one-line summaries.\"\"\"\n     resp = client.chat.completions.create(\n         model=\"gpt-4o\",\n         messages=[\n-            {\"role\": \"system\", \"content\": STYLE_GUIDE + STYLE_GUIDE},\n+            {\"role\": \"system\", \"content\": STYLE_GUIDE},\n             {\"role\": \"user\", \"content\": \"One line summary: \" + ticket},\n         ],\n     )\n",
+          "shadow": null
+        },
+        {
+          "finding_title": "No max_tokens/stop cap on a task defined as \"one line\" -- latent uncapped-output risk (no dollars booked, unverified)",
+          "path": "summarize.py",
+          "explanation": "Adds a defensive completion cap sized for a one-line answer (gpt-4o is a non-reasoning model, so the cap only clips output tokens, never hidden reasoning). Bounds the tail risk of a verbose/rambling completion without affecting the normal one-line case.",
+          "diff": "--- a/summarize.py\n+++ b/summarize.py\n@@ -11,5 +11,6 @@\n             {\"role\": \"system\", \"content\": STYLE_GUIDE + STYLE_GUIDE},\n             {\"role\": \"user\", \"content\": \"One line summary: \" + ticket},\n         ],\n+        max_tokens=40,\n     )\n     return resp.choices[0].message.content\n",
+          "shadow": null
+        }
+      ],
+      "tool_use": {
+        "reads": 1,
+        "searches": 1,
+        "traces": 0
+      },
+      "agent_cost_usd": 0.536,
+      "turns": 24,
+      "wall_s": 299.0,
+      "summary": "## Audit Summary \u2014 erabot cost audit of `tw-dash` sample repo (`summarize.py`)\n\nThis is a minimal repo: **1 file, 1 call site** (`summarize.py:8`, `gpt-4o`, a `summarize_ticket()` helper). I read the full file (15 lines) and confirmed via `search_code` there is no other code \u2014 no callers, no loop, no agent framework. Total repo spend: **~$132/mo** (recorded via `set_repo_cost`).\n\n**Findings emitted (3):**\n\n1. **`oversized_context`** \u2014 `STYLE_GUIDE = \"Write concisely. \" * 500` is then sent as `STYLE_GUIDE + STYLE_GUIDE`, i.e. the same 5-token instruction repeated **1,000x** (~5,100 tokens), on every call, for zero behavioral gain. Measured with `count_tokens` (51 tokens / 10 reps \u2192 ~5,100 tokens / 1,000 reps) and priced with `price`. **$127.37/mo**, quality-neutral, fix shipped (verified apply-ready diff). Caching was considered and explicitly rejected as the remedy \u2014 post-trim the block is only ~5 tokens, far under the ~1,024-token cache minimum, so trimming beats caching outright.\n2. **`model_mismatch`** \u2014 `gpt-4o` for a bounded one-line summary task. I ran `shadow_verify` against `gpt-4o-mini` with 8 representative tickets; it came back **INCONCLUSIVE** (sandbox has no live `gpt-4o` key), so I reported it transparently as unverified rather than hiding it or faking a verdict. Priced both the standalone baseline ($123.91/mo if applied alone) and the non-overlapping incremental figure after finding #1 is applied (**$4.18/mo**, booked, to avoid double-billing the same tokens across two findings on one call site). No fix shipped \u2014 swap isn't verified SAFE.\n3. **`over_generation`** \u2014 no `max_tokens`/stop sequence despite the task being \"one line.\" Booked **$0/mo** deliberately (evidence gate: no measured completion-token traffic shows actual ballooning), fix shipped anyway as a cheap defensive cap since it can't hurt quality on a non-reasoning model.\n\n**Axes swept and ruled out (code-grounded, not just grepped):**\n- *dedup*: no evidence of repeated/identical ticket inputs \u2014 single-shot function, no cache/hash guard to even check.\n- *redundant/skippable calls*: no caller/loop visible to judge triviality gating against.\n- *over-retrieval / RAG*: no retrieval code anywhere in the repo.\n- *batching*: no loop or bulk caller \u2014 single ticket in, single call out; Batch API doesn't fit a per-request path with no visible bulk usage.\n- *tool-schema bloat / tool-response bloat / tool-output overflow*: no `tools=`/function-calling and no tool-result feedback loop in this call at all.\n- *serialization waste*: no structured JSON/array payload in the prompt, just plain ticket text.\n- *code-payload bloat*: no source code sent to the model.\n- *conversation-history bloat*: single-turn, stateless call, no message history object.\n- *retry/error-loop waste*: no retry/backoff logic present.\n- *guardrail/judge overhead*: no judge/guardrail call wraps this.\n- *embedding waste / n>1*: no embeddings, no `n>1`.\n- *eliminate-the-call*: ticket text is unstructured free-form language needing compression/understanding, not a fixed-label classification or already-structured extraction \u2014 a regex/deterministic swap wouldn't preserve summary quality, so this doesn't qualify.\n- *reasoning-token waste*: `gpt-4o` is not a reasoning model here \u2014 N/A.\n- *multimodal/image*: no images in this call.\n- *prompt/context compression*: the only bloat was literal duplication (finding #1); the remaining necessary instruction is 5 tokens, too small for an algorithmic compressor to help.\n- *agentic-loop axes (inner-turn uniformity, agent-memory re-injection)*: **no agentic loop / agent builder in this repo** \u2014 confirmed by reading the full 15-line file, no LangGraph/AgentExecutor/CrewAI/hand-rolled loop exists.\n\n`\u2605 Insight \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500`\nThe biggest lesson from this tiny repo: **the string `\"x\" * 500` pattern is a classic \"looks intentional, costs real money\" bug** \u2014 it reads like deliberate emphasis in code review, but tokenizers don't reward repetition with better instruction-following, so every duplicate byte past the first is a pure tax. It's also a good illustration of why the audit methodology insists on pricing *before* judging severity: this one line was ~97% of the entire call's cost, dwarfing the model-choice question that would normally get all the attention.\n`\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500`",
+      "stopped_reason": "completed"
+    },
+    "07-batch-miss": {
+      "repo": "07-batch-miss",
+      "call_sites": 1,
+      "files": 1,
+      "providers": {
+        "openai": 1
+      },
+      "total_monthly_spend_usd": 0.06,
+      "spend_basis": "estimated \u00b7 no runtime traffic connected",
+      "spend_breakdown": [
+        {
+          "label": "tagger.py product-categorization loop (gpt-4o-mini, tagger.py:8)",
+          "monthly_cost_usd": 0.06
+        }
+      ],
+      "findings": [
+        {
+          "title": "500+ sequential single-item calls \u2014 no prompt consolidation, no Batch API",
+          "category": "batching",
+          "files": [
+            "tagger.py"
+          ],
+          "root_cause": "tag_products() (tagger.py:4-13) issues one synchronous client.chat.completions.create call per product description inside a Python for-loop (line 8). Every call repeats the identical 6-token instruction prefix \"One-word category for: \" (measured with count_tokens) and runs synchronously even though the docstring says this tags \"500+ products one call at a time\" \u2014 an offline/bulk catalog-tagging job with no evident latency requirement. Two compounding wastes: (1) the instruction prefix is paid for on every one of the N calls instead of once per batch, and (2) the whole job is eligible for OpenAI's Batch API (~50% off both input and output tokens, ~24h turnaround) but runs through the synchronous endpoint instead.",
+          "fix": "Consolidate descriptions into batches of ~20 per prompt (one numbered list, one multi-line response) instead of one call per item \u2014 this cuts calls ~20x and pays the instruction prefix once per batch instead of once per item. For the underlying bulk job, additionally submit via the OpenAI Batch API (JSONL upload + client.batches.create) instead of the synchronous client, since this is non-interactive backfill work \u2014 the two stack. Arithmetic (10,000 calls/mo assumption, 29 tokens/call baseline = 25 in + 4 out): consolidating to batches of 20 collapses 10,000 calls to 500, saving 9,500 x 6 = 57,000 prefix tokens/mo = $0.0086 at $0.15/1M; the remaining $0.0530 in sync-priced spend then drops ~50% under Batch API = $0.0265 more. Total \u2248 $0.035/mo saved on this site's $0.0615/mo baseline (~57%).",
+          "monthly_savings_usd": 0.04,
+          "tokens_per_call": 29,
+          "calls_per_month": 10000,
+          "observed_calls": 0,
+          "shadow": null
+        },
+        {
+          "title": "No max_tokens cap on a \"one-word\" classification call",
+          "category": "over_generation",
+          "files": [
+            "tagger.py"
+          ],
+          "root_cause": "The chat.completions.create call at tagger.py:8 sets no max_tokens and no stop sequence, despite the prompt explicitly asking for a single word (\"One-word category for: \" + desc). gpt-4o-mini is free to emit an arbitrarily long completion (hedging, punctuation, a full sentence, an explanation of its reasoning) on any ambiguous or novel description, with no cost ceiling. This sandbox has no measured completion-length telemetry for this call site, so the exact dollar overage from unconstrained verbosity is unverified \u2014 flagged per the evidence gate as a conditional, not-yet-observed saving; the fix itself is free and safe to ship regardless.",
+          "fix": "Add max_tokens=8 (and optionally stop=[\"\\n\"]) to the create() call. gpt-4o-mini is a standard (non-reasoning) model, so a tight completion cap carries no hidden-reasoning-token risk and costs nothing for the intended one-word output while bounding the worst case.",
+          "monthly_savings_usd": 0.0,
+          "tokens_per_call": 29,
+          "calls_per_month": 10000,
+          "observed_calls": 0,
+          "shadow": null
+        },
+        {
+          "title": "Cheaper-than-gpt-4o-mini swap attempted \u2014 INCONCLUSIVE, no live provider access",
+          "category": "model_mismatch",
+          "files": [
+            "tagger.py"
+          ],
+          "root_cause": "gpt-4o-mini is already OpenAI's cheapest mainstream chat-completions tier, so the only remaining model-cost lever is an open-weight candidate via OpenRouter or eliminating the call via regex. Ran shadow_verify(old_model=gpt-4o-mini, new_model=deepseek/deepseek-chat, task_type=label) on 8 representative product descriptions, and verify_elimination with a keyword regex for the same inputs. shadow_verify returned INCONCLUSIVE (\"cannot run the frontier gpt-4o-mini... no proxy or substitute model is used\"); verify_elimination errored (missing ANTHROPIC_API_KEY for its judge) before producing a verdict. Neither tool actually measured a cost delta or quality verdict in this sandbox, so no swap or regex replacement can be defended with evidence here.",
+          "fix": "No apply-ready patch \u2014 do not ship an unverified downgrade. Re-run shadow_verify and verify_elimination with real OpenAI/OpenRouter/Anthropic credentials connected; only ship a swap if the candidate comes back SAFE (>=90% quality retained) and only ship the regex if verify_elimination reports >=90% agreement with the LLM across real inputs. Note the category label here is a placeholder for reporting purposes only \u2014 no cost claim is attached.",
+          "monthly_savings_usd": 0.0,
+          "tokens_per_call": 29,
+          "calls_per_month": 10000,
+          "observed_calls": 0,
+          "shadow": {
+            "verdict": "INCONCLUSIVE",
+            "reason": "no live access to the frontier model gpt-4o-mini",
+            "requested_models": [
+              "gpt-4o-mini"
+            ],
+            "proxy": false,
+            "task": "Classify a product description into a single one-word e-commerce category, used to bulk-tag a product catalog."
+          }
+        }
+      ],
+      "fixes": [
+        {
+          "finding_title": "500+ sequential single-item calls \u2014 no prompt consolidation, no Batch API",
+          "path": "tagger.py",
+          "explanation": "Consolidates N single-item calls into ceil(N/20) batched calls: the instruction text is now paid once per batch instead of once per item, and (mentioned in the finding) this bulk job is also a good candidate for the OpenAI Batch API's ~50% async discount on top of this. Same underlying per-item classification task \u2014 quality-neutral consolidation, not a model change.",
+          "diff": "--- a/tagger.py\n+++ b/tagger.py\n@@ -1,13 +1,19 @@\n import openai\n client = openai.OpenAI()\n \n-def tag_products(descriptions: list[str]) -> list[str]:\n-    \"\"\"Tags 500+ products one call at a time, sequentially.\"\"\"\n+def tag_products(descriptions: list[str], batch_size: int = 20) -> list[str]:\n+    \"\"\"Tags products in batches of `batch_size` per call instead of one call per product.\"\"\"\n     tags = []\n-    for desc in descriptions:\n+    for i in range(0, len(descriptions), batch_size):\n+        batch = descriptions[i:i + batch_size]\n+        numbered = \"\\n\".join(f\"{j + 1}. {d}\" for j, d in enumerate(batch))\n         resp = client.chat.completions.create(\n             model=\"gpt-4o-mini\",\n-            messages=[{\"role\": \"user\", \"content\": \"One-word category for: \" + desc}],\n+            messages=[{\"role\": \"user\", \"content\": (\n+                \"Give a one-word category for each numbered product below. \"\n+                \"Reply with exactly one category per line, same order, no numbering:\\n\" + numbered\n+            )}],\n+            max_tokens=8 * len(batch),\n         )\n-        tags.append(resp.choices[0].message.content)\n+        tags.extend(resp.choices[0].message.content.strip().split(\"\\n\"))\n     return tags\n",
+          "shadow": null
+        },
+        {
+          "finding_title": "No max_tokens cap on a \"one-word\" classification call",
+          "path": "tagger.py",
+          "explanation": "Bounds completion length to what a one-word answer needs. gpt-4o-mini is a standard (non-reasoning) model, so this is a pure cost ceiling with no output-quality tradeoff for the intended task. Shown here as a minimal standalone diff against the original loop; if finding #1's batching fix is applied instead, use max_tokens=8*len(batch) as in that patch.",
+          "diff": "--- a/tagger.py\n+++ b/tagger.py\n@@ -8,6 +8,7 @@\n         resp = client.chat.completions.create(\n             model=\"gpt-4o-mini\",\n             messages=[{\"role\": \"user\", \"content\": \"One-word category for: \" + desc}],\n+            max_tokens=8,\n         )\n         tags.append(resp.choices[0].message.content)\n     return tags\n",
+          "shadow": null
+        }
+      ],
+      "tool_use": {
+        "reads": 1,
+        "searches": 2,
+        "traces": 0
+      },
+      "agent_cost_usd": 0.5852,
+      "turns": 22,
+      "wall_s": 334.2,
+      "summary": "## Audit Summary\n\n**Repo scope:** This is a 1-file, 13-line repo (`tagger.py`) with exactly one detected LLM call site (`tagger.py:8`, `gpt-4o-mini`) \u2014 a synchronous loop tagging 500+ product descriptions one call at a time. Total estimated monthly spend at this site (no connected traffic; used the instructed 10,000 calls/month default and measured 29 tokens/call): **$0.0615/mo**, which is the entire repo's LLM spend.\n\n**Findings emitted (3):**\n1. **Batching** (`tagger.py:4-13`) \u2014 500+ single-item synchronous calls repeat a 6-token instruction prefix per item and never use the OpenAI Batch API for what is clearly offline/bulk backfill work. Fix: consolidate into batches of 20 (shipped, apply-ready) + route the bulk job through the Batch API (~50% discount). Combined saving \u2248 **$0.035/mo (~57% of this site's spend)**, arithmetic shown in the finding.\n2. **Over-generation** \u2014 no `max_tokens` on a call whose prompt explicitly asks for one word. Fix shipped (`max_tokens=8`), $0 quantified since no measured completion-length telemetry exists here (flagged conditional per the evidence gate) \u2014 free, zero-risk to ship regardless.\n3. **Model-mismatch / eliminate-the-call** \u2014 gpt-4o-mini is already the cheapest mainstream OpenAI tier. Attempted `shadow_verify` (vs. `deepseek/deepseek-chat`) and `verify_elimination` (regex classifier) to search further down the ladder; both came back **INCONCLUSIVE** (no live provider keys in this sandbox) rather than fabricated numbers. No patch shipped \u2014 correctly reported as unverified, not as a fake win.\n\n**Axes ruled out (with reasons), not padded in:**\n- **Caching**: the only repeated content is a 6-token instruction prefix \u2014 far below the ~1,024-token minimum for prompt caching to engage.\n- **Dedup**: no caller/scheduler in the repo (this file *is* the repo) shows `tag_products` re-run on an unchanged catalog \u2014 would be an unverified input-recurrence assumption, so not claimed.\n- **Over-retrieval/RAG, tool-schema bloat, serialization, tool-response/tool-output bloat, code-payload bloat, conversation-history bloat, retry/error-loop, guardrail/judge overhead, embedding waste, n>1/speculative, reasoning-token waste, multimodal, prompt/context compression**: none apply \u2014 single blocking text-only completion, no tools, no retrieval, no images, no multi-turn state, no retries, no judge wrapper, no embeddings, default n=1, non-reasoning model.\n- **Agent-loop-only axes (inner-turn uniformity, agent-memory re-injection)**: no agent framework or hand-rolled agent loop anywhere in the repo \u2014 gated out per the rule.\n\n`set_repo_cost` recorded with a full breakdown so the $0.035/mo bankable saving is shown against its true ~$0.06/mo denominator rather than an inflated one.",
+      "stopped_reason": "completed"
+    },
+    "08-eval-frontier": {
+      "repo": "08-eval-frontier",
+      "call_sites": 1,
+      "files": 1,
+      "providers": {
+        "openai": 1
+      },
+      "total_monthly_spend_usd": 1694.0,
+      "spend_basis": "estimated \u00b7 spend floor raised to reconcile with grounded per-call savings \u2014 connect runtime traffic (Helicone/Langfuse/OTel) for measured spend",
+      "spend_breakdown": [
+        {
+          "label": "eval_answers.py nightly PASS/FAIL judge (gpt-4-turbo, ~300k calls/mo)",
+          "monthly_cost_usd": 918.0
+        }
+      ],
+      "findings": [
+        {
+          "title": "Nightly 10k-pair eval judge runs as synchronous per-call requests instead of the OpenAI Batch API",
+          "category": "batching",
+          "files": [
+            "eval_answers.py"
+          ],
+          "root_cause": "The docstring states this judge \"runs nightly over 10k pairs\" \u2014 an explicitly offline, latency-insensitive bulk job (10,000 pairs/night x ~30 nights = 300,000 calls/month, used as calls_per_month since it is grounded directly in the code's stated cron cadence, not the generic default). Yet judge_answer() makes one synchronous client.chat.completions.create() call per pair. OpenAI's Batch API gives a flat 50% discount on both input and output tokens for exactly this shape of job (bulk, ~24h turnaround, no live user waiting), and it stacks with any other fix (model swap, output cap) applied on top.",
+          "fix": "Collect all (question, answer) pairs for the night into a single JSONL file of chat-completion requests, submit once via client.batches.create(input_file_id=..., endpoint=\"/v1/chat/completions\", completion_window=\"24h\"), then poll and parse the results file \u2014 instead of 10,000 individual synchronous calls. This is a pure execution-model change (sync call -> async batch submit+poll); no prompt or model output changes, so it is quality-neutral. NOT shipped as an apply-ready diff: the actual nightly loop that invokes judge_answer() 10,000x is not present in this repo (only the single per-pair function is), so the submit/poll harness needs to be built around code we cannot see and edit safely \u2014 that part is left as a structural recommendation rather than a local patch. Estimated saving: 300,000 calls/mo x 226 tokens/call (186 in + 40 out) x $10/$30 per-1M (gpt-4-turbo) x 50% batch discount = $918/mo -> $459/mo, saving ~$459/mo. This stacks with the over-generation fix and the model-swap fix below (each computed independently against the current baseline).",
+          "monthly_savings_usd": 459.0,
+          "tokens_per_call": 226,
+          "calls_per_month": 300000,
+          "observed_calls": 0,
+          "shadow": null
+        },
+        {
+          "title": "Judge call has no max_tokens cap or terse-output instruction, so PASS/FAIL verdicts pay for unbounded explanation tokens",
+          "category": "over_generation",
+          "files": [
+            "eval_answers.py"
+          ],
+          "root_cause": "The call at eval_answers.py:6-9 sets no max_tokens and the prompt only says \"Grade PASS or FAIL\" rather than explicitly instructing a single-word reply. gpt-4-turbo is not a reasoning model, so there is no hidden-thinking-token risk in capping output \u2014 but left unconstrained, chat models commonly prepend a sentence or two of justification before the verdict (e.g. \"The answer correctly identifies Paris... PASS\" measured at 25 tokens vs a terse \"PASS\" at 1 token in this audit's own count_tokens samples). Assumption, stated plainly: current average completion length is estimated at ~40 tokens/call (a short justification + verdict) vs ~3 tokens/call for a terse enforced reply \u2014 this is a reasonable behavioral assumption grounded in the observed prompt (no terse instruction, no cap), not a measured average, since no runtime traffic is connected.",
+          "fix": "Instruct a single-word reply (\"Respond with exactly one word: PASS or FAIL.\") and set max_tokens=5 on the request. Output-only change to verbosity, not to the grading judgment itself, so this is quality-neutral. Saving: 300,000 calls/mo x ~37 tokens/call removed x $30/1M (gpt-4-turbo output price) = $333/mo.",
+          "monthly_savings_usd": 333.0,
+          "tokens_per_call": 226,
+          "calls_per_month": 300000,
+          "observed_calls": 0,
+          "shadow": null
+        },
+        {
+          "title": "Frontier gpt-4-turbo used for a binary PASS/FAIL eval judge \u2014 likely handled by a much cheaper tier",
+          "category": "model_mismatch",
+          "files": [
+            "eval_answers.py"
+          ],
+          "root_cause": "judge_answer() runs gpt-4-turbo ($10/$30 per 1M in/out) to output a single binary label (PASS/FAIL) grading a candidate answer against a question \u2014 a bounded, checkable classification task, the canonical case for a same-vendor cheap tier or an open-weight model. I ran shadow_verify (task_type=label, 8 representative Q&A pairs spanning clear-PASS, clear-FAIL, and borderline factual/math/explanation cases) comparing gpt-4-turbo -> gpt-4o-mini. Result: shadow_id=2, verdict INCONCLUSIVE \u2014 this sandbox has no live API key for gpt-4-turbo, so the tool could not replay the frontier side and refused to fake a proxy result. This is NOT a quality verdict either way; it is an absence of proof, not proof of safety. Per-model list-price table (same 226 tokens/call, 300,000 calls/mo, computed with price()): gpt-4-turbo (actual site model, $10/1M in) = $918.00/mo | gpt-4o ($2.50/1M in) = $259.50/mo | claude-sonnet-4-5 ($3.00/1M in) = $347.40/mo | gemini-2.5-pro ($1.25/1M in) = $189.75/mo | gpt-4o-mini ($0.15/1M in) = $15.57/mo. Swapping the actual site model gpt-4-turbo -> gpt-4o-mini: $918.00 - $15.57 = $902.43/mo (98% cheaper) if quality holds \u2014 conservative reported number is this gpt-4-turbo->gpt-4o-mini delta since that is the model actually in the code.",
+          "fix": "Swap model=\"gpt-4-turbo\" -> model=\"gpt-4o-mini\" (patch attached). Because the shadow test came back INCONCLUSIVE rather than SAFE, do NOT treat this as a verified-safe swap \u2014 the customer must run their own quality check (e.g. spot-check ~100-200 nightly pairs, compare PASS/FAIL agreement against the current gpt-4-turbo labels) before fully cutting over, since an eval judge's grading calibration silently drifting is a real risk if the cheaper model is systematically more lenient or strict. If mini disagrees materially, gpt-4o ($259.50/mo, still 72% cheaper) is the fallback rung. Patch is shipped because it's a one-line, trivially revertible change, not because quality was confirmed.",
+          "monthly_savings_usd": 902.0,
+          "tokens_per_call": 226,
+          "calls_per_month": 300000,
+          "observed_calls": 0,
+          "shadow": {
+            "verdict": "INCONCLUSIVE",
+            "reason": "no live access to the frontier model gpt-4-turbo-2024-04-09",
+            "requested_models": [
+              "gpt-4-turbo-2024-04-09"
+            ],
+            "proxy": false,
+            "task": "Offline nightly eval judge that grades a candidate Q&A pair as PASS or FAIL, run over 10k+ pairs/night in a batch eval pipeline"
+          }
+        }
+      ],
+      "fixes": [
+        {
+          "finding_title": "Judge call has no max_tokens cap or terse-output instruction, so PASS/FAIL verdicts pay for unbounded explanation tokens",
+          "path": "eval_answers.py",
+          "explanation": "Caps completion length and removes the ambiguity that lets the model pad its answer with justification before the verdict. gpt-4-turbo is not a reasoning model, so a small max_tokens is safe (no hidden reasoning-token truncation risk).",
+          "diff": "--- a/eval_answers.py\n+++ b/eval_answers.py\n@@ -5,6 +5,7 @@\n     \"\"\"Offline eval judge \u2014 runs nightly over 10k pairs on gpt-4-turbo.\"\"\"\n     resp = client.chat.completions.create(\n         model=\"gpt-4-turbo\",\n-        messages=[{\"role\": \"user\", \"content\": f\"Q: {question}\\nA: {answer}\\nGrade PASS or FAIL.\"}],\n+        messages=[{\"role\": \"user\", \"content\": f\"Q: {question}\\nA: {answer}\\nRespond with exactly one word: PASS or FAIL.\"}],\n+        max_tokens=5,\n     )\n     return resp.choices[0].message.content\n",
+          "shadow": null
+        },
+        {
+          "finding_title": "Frontier gpt-4-turbo used for a binary PASS/FAIL eval judge \u2014 likely handled by a much cheaper tier",
+          "path": "eval_answers.py",
+          "explanation": "shadow_verify came back INCONCLUSIVE (no live gpt-4-turbo access in this sandbox to compare against), not SAFE \u2014 this patch is offered for the customer to test against their own held-out PASS/FAIL labels before trusting it in the nightly pipeline, not as a confirmed drop-in.",
+          "diff": "--- a/eval_answers.py\n+++ b/eval_answers.py\n@@ -4,7 +4,7 @@\n def judge_answer(question: str, answer: str) -> str:\n     \"\"\"Offline eval judge \u2014 runs nightly over 10k pairs on gpt-4-turbo.\"\"\"\n     resp = client.chat.completions.create(\n-        model=\"gpt-4-turbo\",\n+        model=\"gpt-4o-mini\",\n         messages=[{\"role\": \"user\", \"content\": f\"Q: {question}\\nA: {answer}\\nGrade PASS or FAIL.\"}],\n     )\n     return resp.choices[0].message.content\n",
+          "shadow": {
+            "verdict": "INCONCLUSIVE",
+            "reason": "no live access to the frontier model gpt-4-turbo-2024-04-09",
+            "requested_models": [
+              "gpt-4-turbo-2024-04-09"
+            ],
+            "proxy": false,
+            "task": "Offline nightly eval judge that grades a candidate Q&A pair as PASS or FAIL, run over 10k+ pairs/night in a batch eval pipeline"
+          }
+        },
+        {
+          "finding_title": "Frontier gpt-4-turbo used for a binary PASS/FAIL eval judge \u2014 likely handled by a much cheaper tier",
+          "path": "eval_answers.py",
+          "explanation": "shadow_verify came back INCONCLUSIVE (no live gpt-4-turbo access in this sandbox to compare against), not SAFE \u2014 this patch is offered for the customer to test against their own held-out PASS/FAIL labels before trusting it in the nightly pipeline, not as a confirmed drop-in. Filed as a structural (unverified) patch since the shadow run produced no measured saving/quality stats to attach.",
+          "diff": "--- a/eval_answers.py\n+++ b/eval_answers.py\n@@ -4,7 +4,7 @@\n def judge_answer(question: str, answer: str) -> str:\n     \"\"\"Offline eval judge \u2014 runs nightly over 10k pairs on gpt-4-turbo.\"\"\"\n     resp = client.chat.completions.create(\n-        model=\"gpt-4-turbo\",\n+        model=\"gpt-4o-mini\",\n         messages=[{\"role\": \"user\", \"content\": f\"Q: {question}\\nA: {answer}\\nGrade PASS or FAIL.\"}],\n     )\n     return resp.choices[0].message.content\n",
+          "shadow": null
+        }
+      ],
+      "tool_use": {
+        "reads": 1,
+        "searches": 2,
+        "traces": 0
+      },
+      "agent_cost_usd": 0.6226,
+      "turns": 32,
+      "wall_s": 272.5,
+      "summary": "\u2605 Insight \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\nThis repo is a single 10-line file \u2014 one function, one call site \u2014 which makes it a clean worked example of how *volume* and *verbosity* often dwarf the model-choice lever: the docstring's \"nightly over 10k pairs\" turned a 10-line snippet into a $918/mo spend once multiplied out over a month. The two quality-neutral fixes (batching + output cap) alone reclaim ~$792/mo (86% of total spend) with zero risk to grading quality, before you even touch the model itself.\n`\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500`\n\n## Audit summary \u2014 eval_answers.py\n\n**Total repo spend: $918/mo** (one call site: `eval_answers.py:6`, `gpt-4-turbo`, 300,000 calls/mo derived from the docstring's own stated cadence \u2014 \"runs nightly over 10k pairs\" \u00d7 ~30 nights).\n\n**3 findings, all quantified:**\n\n| # | Category | Finding | Savings/mo | Verified? |\n|---|----------|---------|-----------|-----------|\n| 1 | `batching` | Nightly 10k-pair job sent as sync per-call requests instead of OpenAI Batch API (50% discount, matches the \"offline/nightly\" cadence) | **$459** | quality-neutral, no shadow needed |\n| 2 | `over_generation` | No `max_tokens`/terse instruction \u2014 PASS/FAIL verdict pays for unbounded explanation tokens | **$333** | quality-neutral, patch shipped |\n| 3 | `model_mismatch` | gpt-4-turbo grading a binary PASS/FAIL label \u2014 classic case for a cheap tier | **$902** (list-price delta) | shadow-tested \u2192 **INCONCLUSIVE** (no live gpt-4-turbo key in this sandbox); patch shipped but flagged unverified |\n\nFindings #1 and #2 are independent, quality-neutral, stackable axes \u2014 a customer can bank both today. Finding #3's dollar figure is a defensible list-price computation, but I could not get a real quality verdict (shadow_verify refused to fabricate a frontier comparison when it had no live access), so it's shipped as a testable patch, not a confirmed-safe one.\n\n**Axes swept and ruled out** (each checked against the actual 10-line file, not just grepped):\n- **caching** \u2014 the only stable content is the 4-token \"Grade PASS or FAIL\" instruction; everything else (Q, A) changes every call. Far below the ~1,024-token minimum cacheable block size. Ruled out.\n- **dedup** \u2014 the judge grades a system-under-test's *own* answers, which change as that system changes between nightly runs; no evidence the same (question, answer) pair recurs verbatim. Ruled out per the evidence gate (no observed repetition).\n- **redundant/skippable calls, retry/error-loop** \u2014 no loop or retry logic is present in this file; the orchestration harness that calls this 10,000\u00d7/night isn't in the repo, so nothing here to flag.\n- **over-retrieval (RAG), tool-schema bloat, serialization waste, tool-response/tool-output bloat, code-payload bloat, embedding waste, multimodal** \u2014 none apply; no retrieval, no tools, no structured payloads, no images, no embeddings anywhere in the call.\n- **conversation-history bloat** \u2014 single-turn call, no history.\n- **guardrail/judge overhead** \u2014 this call *is* the judge; it isn't itself wrapped by a second guardrail call.\n- **n>1/speculative generation** \u2014 `n` not set, defaults to 1.\n- **reasoning-token waste** \u2014 gpt-4-turbo is a standard chat model, not a reasoning model; not applicable (and the over-generation cap is safe to apply for exactly this reason).\n- **eliminate-the-call** \u2014 grading free-form answer correctness requires semantic judgment, not a fixed label set or extractable field a regex could reliably replace; ruled out (not run through verify_elimination since there's no deterministic candidate to test).\n- **prompt/context compression** \u2014 prompt is ~30\u2013190 tokens, far too short to be a \"long stable block\" candidate.\n- **agent-loop axes (inner-turn uniformity, agent-memory re-injection)** \u2014 no agent framework or hand-rolled loop anywhere in this repo (no LangGraph/CrewAI/AutoGen/loop-with-tool-feedback). Ruled out in one line as instructed.\n\nTwo apply-ready patches shipped (over-generation cap, model swap); the batching fix is documented as a structural recommendation only, since the actual nightly 10k-call driver loop isn't present in this repo to safely edit.",
+      "stopped_reason": "completed"
+    },
+    "09-double-call": {
+      "repo": "09-double-call",
+      "call_sites": 2,
+      "files": 1,
+      "providers": {
+        "anthropic": 2
+      },
+      "total_monthly_spend_usd": 57.0,
+      "spend_basis": "estimated \u00b7 no runtime traffic connected",
+      "spend_breakdown": [
+        {
+          "label": "summary generation call (handler.py:5)",
+          "monthly_cost_usd": 28.5
+        },
+        {
+          "label": "duplicate title generation call (handler.py:10)",
+          "monthly_cost_usd": 28.5
+        }
+      ],
+      "findings": [
+        {
+          "title": "Duplicate identical LLM call to derive the title (same prompt, same model, called twice per request)",
+          "category": "elimination",
+          "files": [
+            "handler.py"
+          ],
+          "root_cause": "handler.py:10 issues a second claude-sonnet-4 call with the exact same prompt (\"Summarize: \" + query), same max_tokens=300, and same model as the call at handler.py:5 -- the only difference is the result is truncated to 60 chars afterward (title[:60]). The code comment even flags it: \"identical call repeated to build the title \u2014 same model, same input.\" This is pure duplicate spend: every request to handle() pays for two independent generations of the same summarization task when the second one's only downstream use is a 60-char slice of text that the first call's output already provides.",
+          "fix": "Delete the second client.messages.create call and derive the title deterministically from the first call's summary text: title = summary[:60]. This removes one full LLM call per request with no model-output-generating step lost -- the title was always going to be truncated to 60 chars downstream anyway, so slicing the existing summary is functionally equivalent to what the code already does to the duplicate call's output, at zero marginal generation cost. (Alternative remedy: if title and summary genuinely need independently-sampled text, batch both asks into ONE call with two labeled outputs instead of two round trips -- still one call instead of two. Ship the truncation fix as it's simpler and the current code already truncates.)",
+          "monthly_savings_usd": 28.5,
+          "tokens_per_call": 350,
+          "calls_per_month": 10000,
+          "observed_calls": 0,
+          "shadow": null
+        },
+        {
+          "title": "Frontier model (claude-sonnet-4) used for a plain single-paragraph summarization task",
+          "category": "model_mismatch",
+          "files": [
+            "handler.py"
+          ],
+          "root_cause": "handler.py:5-8 calls claude-sonnet-4 (Anthropic's frontier tier) to summarize an arbitrary user query into a short, non-agentic, no-tool-use text summary with a 300-token output cap. There's no multi-step reasoning, tool use, code generation, or safety-critical judgment in this task -- it's a bounded, single-turn \"condense this text\" job, which is squarely in the range Anthropic's cheaper Haiku tier is built for. Priced at the same 200 input / 150 output tokens/call: claude-sonnet-4 = $0.002850/call vs claude-haiku-4-5 = $0.000950/call, a 3x cost difference for the same task shape.",
+          "fix": "Swap model=\"claude-sonnet-4\" to model=\"claude-haiku-4-5\" for this call. IMPORTANT CAVEAT: shadow_verify could not run in this environment -- both attempts (model ids \"claude-sonnet-4\" and \"claude-sonnet-4-20250514\") came back INCONCLUSIVE because this sandbox has no live Anthropic API key/access to replay the frontier model, so no measured quality-retention number is available (shadow_id=2, ladder not reachable). The $/call delta below is a list-price projection, not a verified-safe swap. Before rolling this out, the customer should run their own before/after comparison on a sample of real queries (or use erabot's shadow_verify from an environment with Anthropic access) to confirm claude-haiku-4-5 preserves summary/title quality -- this is shipped as a recommended, reversible one-line change, not a confirmed-safe patch.",
+          "monthly_savings_usd": 19.0,
+          "tokens_per_call": 350,
+          "calls_per_month": 10000,
+          "observed_calls": 0,
+          "shadow": {
+            "verdict": "INCONCLUSIVE",
+            "reason": "no live access to the frontier model claude-sonnet-4-20250514",
+            "requested_models": [
+              "claude-sonnet-4-20250514"
+            ],
+            "proxy": false,
+            "task": "Summarize a short user-submitted text/query (e.g. a support ticket, status update, or article snippet) into a concise summary, and separately derive a short title from it. Output is used directly in an API response with no further LLM processing."
+          }
+        }
+      ],
+      "fixes": [
+        {
+          "finding_title": "Duplicate identical LLM call to derive the title (same prompt, same model, called twice per request)",
+          "path": "handler.py",
+          "explanation": "Removes the duplicate claude-sonnet-4 call entirely (handler.py:10-13). The title was already being truncated to 60 chars, so slicing the first call's summary output is functionally equivalent and eliminates one full paid LLM call per request -- quality-neutral, no model output changes for the summary field.",
+          "diff": "--- a/handler.py\n+++ b/handler.py\n@@ -6,9 +6,6 @@\n         model=\"claude-sonnet-4\", max_tokens=300,\n         messages=[{\"role\": \"user\", \"content\": \"Summarize: \" + query}],\n     ).content[0].text\n-    # identical call repeated to build the title \u2014 same model, same input\n-    title = client.messages.create(\n-        model=\"claude-sonnet-4\", max_tokens=300,\n-        messages=[{\"role\": \"user\", \"content\": \"Summarize: \" + query}],\n-    ).content[0].text\n-    return {\"title\": title[:60], \"summary\": summary}\n+    # title is derived from the summary instead of a second identical LLM call\n+    title = summary[:60]\n+    return {\"title\": title, \"summary\": summary}\n",
+          "shadow": null
+        },
+        {
+          "finding_title": "Frontier model (claude-sonnet-4) used for a plain single-paragraph summarization task",
+          "path": "handler.py",
+          "explanation": "Recommended model downgrade for a plain summarization task. UNVERIFIED in this sandbox (shadow_verify came back INCONCLUSIVE -- no Anthropic API access to replay claude-sonnet-4 as the frontier baseline). Ship only after the customer confirms quality holds on their own traffic sample; treat as a reversible suggestion, not a confirmed-safe patch.",
+          "diff": "--- a/handler.py\n+++ b/handler.py\n@@ -3,7 +3,7 @@\n \n def handle(query: str) -> dict:\n     summary = client.messages.create(\n-        model=\"claude-sonnet-4\", max_tokens=300,\n+        model=\"claude-haiku-4-5\", max_tokens=300,\n         messages=[{\"role\": \"user\", \"content\": \"Summarize: \" + query}],\n     ).content[0].text\n     # identical call repeated to build the title \u2014 same model, same input\n",
+          "shadow": {
+            "verdict": "INCONCLUSIVE",
+            "reason": "no live access to the frontier model claude-sonnet-4-20250514",
+            "requested_models": [
+              "claude-sonnet-4-20250514"
+            ],
+            "proxy": false,
+            "task": "Summarize a short user-submitted text/query (e.g. a support ticket, status update, or article snippet) into a concise summary, and separately derive a short title from it. Output is used directly in an API response with no further LLM processing."
+          }
+        }
+      ],
+      "tool_use": {
+        "reads": 1,
+        "searches": 2,
+        "traces": 1
+      },
+      "agent_cost_usd": 0.539,
+      "turns": 19,
+      "wall_s": 208.4,
+      "summary": "## Audit Summary \u2014 erabot cost audit of `handler.py`\n\nThis repo is intentionally tiny: 1 file, 2 call sites, both `claude-sonnet-4`, no agent loop, no RAG, no tools. That made it a clean sweep rather than a deep-dive \u2014 here's the full per-axis accounting.\n\n### Findings shipped\n\n**1. Duplicate identical call (category: `elimination`) \u2014 $28.50/mo**\n`handler.py:10` re-issues the *exact same* prompt, model, and `max_tokens` as `handler.py:5` just to produce a title that's immediately truncated to 60 chars. The code's own comment flags it. Fix: derive `title = summary[:60]` from the first call's output \u2014 deletes one full paid call per request, zero output-quality change. Shipped as an apply-ready patch (validated diff, no shadow test needed \u2014 it's structural, not a model change).\n\n**2. Model mismatch on the surviving call (category: `model_mismatch`) \u2014 $19/mo projected, UNVERIFIED**\n`claude-sonnet-4` for a bounded, single-turn \"condense this text\" task is frontier tier for a Haiku-shaped job. I tried `shadow_verify` twice (`claude-sonnet-4` and `claude-sonnet-4-20250514` as the frontier baseline) \u2014 both came back **INCONCLUSIVE**: this sandbox has no live Anthropic API access to replay the frontier model, so I could not measure quality retention. Per the audit discipline, an unverified model swap does **not** ship as an apply-ready patch \u2014 I recorded the finding with its real shadow_id (showing the INCONCLUSIVE verdict honestly, not hidden) and gave the one-line fix as a prose recommendation only, with an explicit \"verify on your own traffic before shipping\" caveat.\n\n`\u2605 Insight \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500`\nTwo important auditing disciplines showed up here concretely: (1) **distinct axes on one call site are separate dollars, never merged** \u2014 the duplicate-call waste and the model-tier waste are both real on `handler.py:5`/`:10`, so they're two findings, not one blended one; collapsing them would hide $19/mo of real, separately-actionable savings. (2) **\"inconclusive\" is a legitimate shadow_verify outcome, not a failure to paper over** \u2014 when the tool can't reach the frontier model to replay it, the honest move is to report the projected list-price delta *with* the caveat and withhold the apply-ready patch, rather than either faking a verdict or silently dropping the finding.\n`\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500`\n\n### Axes ruled out (with evidence, not just a grep)\n\n| Axis | Verdict |\n|---|---|\n| caching | No system prompt or stable prefix exists \u2014 the entire message is dynamic (`\"Summarize: \" + query`). Nothing to mark cacheable, and it's well under the ~1,024-token minimum anyway. |\n| dedup (cross-run reprocessing) | No document/record re-processed across separate runs \u2014 only the *duplicate finding above*, which is a within-request duplicate, already captured. |\n| over-retrieval (RAG) | No retrieval code in the repo. |\n| batching | Single-item, per-request handler \u2014 no loop over N items to collapse. |\n| oversized/static context | Prompt is ~200 tokens, entirely dynamic; nothing static to trim. |\n| tool-schema bloat | No `tools=` param, no function-calling. |\n| serialization waste | No structured JSON fed into the prompt. |\n| tool-response bloat / tool-output overflow | No tool calls exist. |\n| code-payload bloat | Not a code-review/codegen call. |\n| over-generation | `max_tokens=300` is already a sane, explicit cap for a summary task. |\n| conversation-history bloat | Single-shot calls, no message history retained. |\n| retry/error-loop | No retry/backoff logic present. |\n| guardrail/judge overhead | No judge/critique call wraps this. |\n| embedding waste | No embeddings used. |\n| n>1/speculative | No `n>1`; the \"duplicate\" call is a manual double-ask, already covered as Finding 1. |\n| reasoning-token waste | `claude-sonnet-4` called with no extended-thinking/reasoning params. |\n| multimodal/image | No images anywhere. |\n| prompt/context compression | Prompt is short and fully dynamic, not a long stable block worth compressing. |\n| agent-loop axes (inner-turn uniformity, agent-memory re-injection) | **No agentic loop or agent-builder framework in this repo** (confirmed via search \u2014 no LangGraph/CrewAI/AutoGen/AgentExecutor/hand-rolled loop) \u2014 both axes ruled out per the gate. |\n\n### Repo total spend\n\n`set_repo_cost` = **$57.00/mo** (2 call sites \u00d7 10,000 calls/mo default \u00d7 $0.002850/call, grounded via `count_tokens` on a representative sample query and `price()` for `claude-sonnet-4`). Of that, **$28.50/mo (50%) is bankable today** via the apply-ready duplicate-call fix, and a further **$19/mo (33%) is a plausible but unverified** model-tier saving pending the customer's own quality check.",
+      "stopped_reason": "completed"
+    },
+    "10-efficient-llm": {
+      "repo": "10-efficient-llm",
+      "call_sites": 1,
+      "files": 1,
+      "providers": {
+        "openai": 1
+      },
+      "total_monthly_spend_usd": 0.05,
+      "spend_basis": "estimated \u00b7 no runtime traffic connected",
+      "spend_breakdown": [
+        {
+          "label": "classify.py sentiment classification (gpt-4o-mini, cached, capped)",
+          "monthly_cost_usd": 0.05
+        }
+      ],
+      "findings": [],
+      "fixes": [],
+      "tool_use": {
+        "reads": 1,
+        "searches": 1,
+        "traces": 0
+      },
+      "agent_cost_usd": 0.2607,
+      "turns": 12,
+      "wall_s": 109.3,
+      "summary": "## Audit Summary\n\n**Scope:** `list_call_sites` returned exactly what the task stated \u2014 1 call site, 1 file: `classify.py:8` (`gpt-4o-mini`). I read the full file (13 lines) and confirmed via `search_code` (broad regex for `openai|anthropic|gemini|chat.completions|generate_content|AgentExecutor|StateGraph|Crew(|Runner.run|initiate_chat`) that no other LLM call, agent framework, or loop exists anywhere in the audited repo.\n\n```python\n@functools.lru_cache(maxsize=4096)\ndef classify(text: str) -> str:\n    \"\"\"Cheap model, tiny prompt, cached, bounded \u2014 nothing to fix here.\"\"\"\n    resp = client.chat.completions.create(\n        model=\"gpt-4o-mini\",\n        max_tokens=4,\n        messages=[{\"role\": \"user\", \"content\": \"positive or negative: \" + text[:280]}],\n    )\n    return resp.choices[0].message.content.strip()\n```\n\n**No findings emitted.** Axis-by-axis accounting:\n\n| Axis | Verdict |\n|---|---|\n| caching (prompt cache) | Ruled out \u2014 prompt is ~19-24 tokens, far under the ~1,024-token provider minimum for prompt caching to pay off; no stable system-prompt block exists to cache. |\n| dedup | Ruled out \u2014 already implemented: `functools.lru_cache(maxsize=4096)` memoizes identical inputs before they ever reach the API. |\n| redundant/skippable calls | Ruled out \u2014 single call, no duplicate work on this path. |\n| over-retrieval (RAG) | Ruled out \u2014 no retrieval code in repo. |\n| batching | Ruled out \u2014 no evidence `classify()` is invoked in a loop anywhere in the audited files (evidence gate: can't assume a bulk-call pattern that isn't observed). |\n| oversized/static context | Ruled out \u2014 prompt is a single truncated user string (`text[:280]`), no static/system context attached. |\n| tool-schema bloat | Ruled out \u2014 no `tools=`/function-calling in this call. |\n| serialization waste | Ruled out \u2014 no structured JSON passed into the prompt. |\n| tool-response bloat / tool-output overflow | Ruled out \u2014 not an agent/tool loop. |\n| code-payload bloat | Ruled out \u2014 task doesn't process source code. |\n| over-generation | Ruled out \u2014 already capped `max_tokens=4`, appropriate for a one-word label. |\n| conversation-history bloat | Ruled out \u2014 single-turn call, no history. |\n| retry/error-loop | Ruled out \u2014 no retry logic present. |\n| guardrail/judge overhead | Ruled out \u2014 no judge/critique call. |\n| embedding waste | Ruled out \u2014 no embeddings used. |\n| n>1/speculative | Ruled out \u2014 default `n=1`. |\n| model_mismatch | Ruled out \u2014 `gpt-4o-mini` is already OpenAI's cheapest usable tier for this task. |\n| eliminate-the-call | **Investigated, not shipped.** This is a fixed-label (positive/negative) classification \u2014 the canonical eliminate-the-call candidate \u2014 so I attempted `verify_elimination` with a keyword-regex replacement twice; both calls failed with `KeyError: 'ANTHROPIC_API_KEY'` (verifier-backend environment issue, not something I can fix from here). Absent a SAFE verdict I will not ship an unverified regex swap. Independently, my own sample set included a sarcasm case (\"Oh great, another broken item. Just what I needed.\") and a mixed-sentiment case (\"fast but... damaged\") that a naive keyword regex would very plausibly misclassify against the LLM \u2014 real generalization risk. Combined with the total spend at this site (\u2248$0.05/mo at default volume assumptions), the expected saving does not justify shipping an unverified, risky swap. No finding emitted. |\n| reasoning-token waste | Ruled out \u2014 not a reasoning model. |\n| multimodal/image | Ruled out \u2014 text-only. |\n| prompt/context compression | Ruled out \u2014 prompt is 19-24 tokens; nowhere near the scale where a compressor applies. |\n| agent-loop axes (inner-turn uniformity, agent-memory re-injection) | Ruled out in one line \u2014 no agent framework (LangGraph/AgentExecutor/CrewAI/AutoGen/Agents SDK/hand-rolled while-loop) exists anywhere in the audited repo. |\n\n**Repo total spend:** `set_repo_cost` recorded **$0.05/month**, computed as 10,000 calls/mo (default assumption \u2014 no connected runtime traffic per `get_measured_traffic`) \u00d7 ~24 tokens/call \u00d7 gpt-4o-mini pricing ($0.000005/call). This is the only call path in the repo, so it's the entire denominator.\n\n**Bottom line:** this call site is already well-optimized (cheap model, capped output, memoized, tiny prompt) and the docstring's claim \u2014 \"nothing to fix here\" \u2014 holds up under the full sweep. The one theoretically live lever (eliminate-the-call via regex) couldn't be verified due to a tooling outage, and the spend at stake is a nickel a month, so it isn't worth shipping unverified. No apply-ready fixes to ship this round.",
+      "stopped_reason": "completed"
+    },
+    "06-multi-issue#rerun": {
+      "repo": "06-multi-issue",
+      "call_sites": 1,
+      "files": 1,
+      "providers": {
+        "openai": 1
+      },
+      "total_monthly_spend_usd": 252.76,
+      "spend_basis": "estimated \u00b7 spend floor raised to reconcile with grounded per-call savings \u2014 connect runtime traffic (Helicone/Langfuse/OTel) for measured spend",
+      "spend_breakdown": [
+        {
+          "label": "summarize_ticket() gpt-4o calls (bloated 1000x-repeated system prompt)",
+          "monthly_cost_usd": 133.25
+        }
+      ],
+      "findings": [
+        {
+          "title": "System prompt bloated 1000x with a repeated no-op phrase",
+          "category": "oversized_context",
+          "files": [
+            "summarize.py"
+          ],
+          "root_cause": "STYLE_GUIDE = \"Write concisely. \" * 500 (summarize.py:4) repeats a 3-word instruction 500 times (~2,555 tokens measured via count_tokens), and the system message then concatenates it with itself again (STYLE_GUIDE + STYLE_GUIDE, line 11), doubling it to ~5,110 tokens for a system prompt whose entire semantic content is the phrase \"Write concisely.\" This is sent on every call alongside a one-line ticket. Measured: full system message (100 reps) = 511 tokens -> 500 reps extrapolates to ~2,555 tokens; doubled = ~5,110 tokens, vs. ~10 tokens needed to express the same instruction once. No RAG docs, schemas, or policy text justify this size -- it is pure repetition.",
+          "fix": "Set STYLE_GUIDE to a single instance of the sentence and stop concatenating it with itself in the messages list. This is quality-neutral: the model receives the identical instruction, just not repeated 1000 times, so output does not change. (Note: this also removes the block from OpenAI's automatic-prompt-cache eligibility since it drops below the ~1024-token minimum -- that's fine, the cache was only ever discounting this self-inflicted bloat at 0.5x, not eliminating it; removing the bloat outright is strictly better than caching it.)",
+          "monthly_savings_usd": 127.5,
+          "tokens_per_call": 5240,
+          "calls_per_month": 10000,
+          "observed_calls": 0,
+          "shadow": null
+        },
+        {
+          "title": "gpt-4o used for trivial one-line ticket summarization",
+          "category": "model_mismatch",
+          "files": [
+            "summarize.py"
+          ],
+          "root_cause": "summarize_ticket() (summarize.py:8-14) hardcodes model=\"gpt-4o\" for a bounded, low-difficulty task: producing a one-line summary of a support ticket. This is squarely in the range cheaper tiers (gpt-4o-mini) or open-weight models handle reliably. At current tokens/call (~5,210 input incl. the bloated system prompt + ~30 output), gpt-4o costs $0.013325/call vs gpt-4o-mini's $0.000799/call for the identical input -- a 94% per-call reduction.",
+          "fix": "Swap model=\"gpt-4o\" -> model=\"gpt-4o-mini\" (or cheaper still, an open-weight summarizer via OpenRouter, e.g. deepseek/deepseek-chat, for latency-insensitive batches). shadow_verify was attempted (task_type=summarize, 8 representative ticket inputs, success_criteria = \"captures the ticket's core issue and is usable as a queue-view label\") but came back INCONCLUSIVE: this sandbox has no live API key for the frontier model (gpt-4o) itself, so the before/after comparison could not run -- it is not a proxy/stand-in result, it is simply unmeasured. Do NOT treat this as a verified-safe swap; re-run shadow_verify (or an offline eval on real tickets) with real OpenAI access before rollout, or canary the swap on a fraction of traffic and compare summary quality before cutting over 100%. This finding's dollars are computed independently of the oversized-context finding (holding tokens/call at the current, unfixed prompt size) -- the two fixes compound rather than add: applying both together (trim + swap) lands near $0.000034/call (~$0.34/mo at 10k calls), far below either fix's saving taken in isolation.",
+          "monthly_savings_usd": 125.26,
+          "tokens_per_call": 5240,
+          "calls_per_month": 10000,
+          "observed_calls": 0,
+          "shadow": {
+            "verdict": "INCONCLUSIVE",
+            "reason": "no live access to the frontier model gpt-4o",
+            "requested_models": [
+              "gpt-4o"
+            ],
+            "proxy": false,
+            "task": "Generate a one-line summary of a customer support ticket, to be shown in a ticket queue/dashboard view."
+          }
+        },
+        {
+          "title": "No max_tokens cap on a one-line-summary completion",
+          "category": "over_generation",
+          "files": [
+            "summarize.py"
+          ],
+          "root_cause": "The chat.completions.create call (summarize.py:8-14) sets no max_tokens and no stop sequence for a task whose contract is \"one line\". gpt-4o is not a reasoning model, so there is no hidden-reasoning-token risk in capping it -- but nothing today prevents an outlier ticket (or an off-distribution response) from generating a much longer completion than the task needs, and completion tokens are billed at 4x the input rate on gpt-4o ($10/1M vs $2.50/1M).",
+          "fix": "Add max_tokens=60 (generous for one line) to the create() call. Quality-neutral for the intended behavior: any response that already fits in one line is unaffected; it only caps the tail-risk of a runaway completion.",
+          "monthly_savings_usd": 0.0,
+          "tokens_per_call": 5240,
+          "calls_per_month": 10000,
+          "observed_calls": 0,
+          "shadow": null
+        }
+      ],
+      "fixes": [
+        {
+          "finding_title": "System prompt bloated 1000x with a repeated no-op phrase",
+          "path": "summarize.py",
+          "explanation": "Removes the 500x repetition of a 3-word instruction. Same semantic content, ~2,545 fewer tokens per call.",
+          "diff": "--- a/summarize.py\n+++ b/summarize.py\n@@ -1,7 +1,7 @@\n import openai\n client = openai.OpenAI()\n \n-STYLE_GUIDE = \"Write concisely. \" * 500\n+STYLE_GUIDE = \"Write concisely.\"\n \n def summarize_ticket(ticket: str) -> str:\n     \"\"\"gpt-4o for one-line summaries, with a 500x-duplicated style guide.\"\"\"\n",
+          "shadow": null
+        },
+        {
+          "finding_title": "System prompt bloated 1000x with a repeated no-op phrase",
+          "path": "summarize.py",
+          "explanation": "Stops sending the style guide twice in the same system message. Combined with the STYLE_GUIDE definition fix, cuts the system prompt from ~5,110 tokens to ~10.",
+          "diff": "--- a/summarize.py\n+++ b/summarize.py\n@@ -8,7 +8,7 @@\n     resp = client.chat.completions.create(\n         model=\"gpt-4o\",\n         messages=[\n-            {\"role\": \"system\", \"content\": STYLE_GUIDE + STYLE_GUIDE},\n+            {\"role\": \"system\", \"content\": STYLE_GUIDE},\n             {\"role\": \"user\", \"content\": \"One line summary: \" + ticket},\n         ],\n     )\n",
+          "shadow": null
+        },
+        {
+          "finding_title": "No max_tokens cap on a one-line-summary completion",
+          "path": "summarize.py",
+          "explanation": "Caps completion length for a task that only ever needs one line, bounding the tail-risk cost of an unexpectedly long completion without truncating normal one-line output.",
+          "diff": "--- a/summarize.py\n+++ b/summarize.py\n@@ -11,5 +11,6 @@\n             {\"role\": \"system\", \"content\": STYLE_GUIDE + STYLE_GUIDE},\n             {\"role\": \"user\", \"content\": \"One line summary: \" + ticket},\n         ],\n+        max_tokens=60,\n     )\n     return resp.choices[0].message.content\n",
+          "shadow": null
+        }
+      ],
+      "tool_use": {
+        "reads": 1,
+        "searches": 1,
+        "traces": 0
+      },
+      "agent_cost_usd": 0.5257,
+      "turns": 25,
+      "wall_s": 268.5,
+      "summary": "## Audit summary \u2014 `tw-dash` (1 call site, `summarize.py:8`, gpt-4o)\n\n**Total estimated monthly spend: ~$133/mo** (single call site, no measured traffic connected, so priced at the audit default of 10,000 calls/mo \u00d7 ~5,240 tokens/call \u00d7 gpt-4o rates).\n\n`\u2605 Insight \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500`\nThe three findings below are a clean illustration of why the audit brief insists on breadth-first, orthogonal accounting: a token-count bug (`STYLE_GUIDE * 500`, then doubled), a model-tier choice, and a missing output cap all live on the *same line of code* but are three independent dollar levers \u2014 fixing one doesn't fix the others, and their savings don't simply add when stacked (they compound multiplicatively on the same base cost).\n`\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500`\n\n### Findings (fixes applied, 3/3 apply cleanly)\n\n1. **Oversized context \u2014 1000x-repeated no-op phrase** (`oversized_context`, **$127.50/mo**, fix shipped, shadow_id=0)\n   `STYLE_GUIDE = \"Write concisely. \" * 500` then `STYLE_GUIDE + STYLE_GUIDE` in the system message inflates a 3-word instruction into ~5,110 tokens sent on *every* call. Measured via `count_tokens` (100 reps = 511 tokens \u2192 extrapolated). Fix: collapse to a single `\"Write concisely.\"` and drop the self-concatenation \u2014 same semantic instruction, ~2,545\u2192~5 tokens. Quality-neutral: model output is unaffected, it just stops re-reading the same sentence 1000 times.\n\n2. **Model mismatch \u2014 gpt-4o for one-line ticket summaries** (`model_mismatch`, **$125.26/mo** computed independently, shadow_id=1: **INCONCLUSIVE**)\n   Trivial, bounded summarization task hardcoded to gpt-4o. `price` shows gpt-4o-mini at the same token count costs ~6% as much. I ran `shadow_verify` with 8 representative ticket inputs and explicit success criteria, but it came back **INCONCLUSIVE** \u2014 this sandbox has no live gpt-4o key, so the frontier side of the before/after comparison couldn't run (not a fabricated result \u2014 genuinely unmeasured). I'm surfacing the dollar figure and the model swap as a real, quantified opportunity, but **not** shipping it as a verified-safe patch \u2014 the recommendation is to re-run the shadow test (or canary the swap) with real API access before rollout.\n\n3. **Over-generation \u2014 no `max_tokens` cap** (`over_generation`, $0 booked \u2014 no observed evidence of long completions, flagged as tail-risk protection, fix shipped, shadow_id=0)\n   The call sets no `max_tokens`/stop sequence for a \"one line\" contract. gpt-4o isn't a reasoning model, so capping it carries no hidden-reasoning-token risk. Added `max_tokens=60` \u2014 bounds worst-case cost without truncating any output that's already one line.\n\n### Axes swept and ruled out (code-grounded, not just grepped)\n- **Caching**: the system prompt is stable and correctly ordered *before* the dynamic ticket text \u2014 OpenAI's automatic prompt caching would apply here for free once/if the block clears the ~1024-token minimum. But that minimum only existed *because* of the bug in finding #1; after trimming it, the block is ~5 tokens and no longer cache-eligible \u2014 which is fine, since removing the bloat outright beats paying even a cached 0.5x rate on self-inflicted repetition.\n- **Dedup, redundant/skippable calls, batching**: single function, single call per ticket, no loop over multiple tickets and no evidence tickets repeat \u2014 nothing to dedup or batch.\n- **Over-retrieval / RAG, tool-schema bloat, serialization waste, tool-response/tool-output bloat, code-payload bloat**: no retrieval, no tool/function-calling schemas, no structured JSON payloads, no agent tool loop present in this file.\n- **Conversation-history bloat, retry/error-loop, guardrail/judge overhead**: no message history, no retry logic, no judge/guardrail wrapper.\n- **Embedding waste, n>1/speculative generation**: no embeddings anywhere; `n` unset (defaults to 1).\n- **Reasoning-token waste, multimodal/image cost**: gpt-4o is non-reasoning and text-only here \u2014 both inapplicable.\n- **Prompt/context compression**: would double-bill finding #1's dollars (same tokens, alternative remedy) \u2014 folded into that finding rather than emitted separately.\n- **Eliminate-the-call**: free-form summarization of arbitrary ticket text isn't a fixed-label classification or structured extraction a regex/deterministic rule could replace \u2014 doesn't qualify.\n- **Agent-loop-only axes (inner-turn model uniformity, agent-memory re-injection)**: no agent framework (LangGraph/AgentExecutor/CrewAI/hand-rolled loop) anywhere in this repo \u2014 ruled out, not applicable.\n\nAll three fixes are apply-ready (`emit_fix` validated them against the live file). The model-mismatch fix is intentionally *not* shipped as an unattended patch given the inconclusive verification \u2014 that one needs a human (or a shadow test with real API access) before flipping.",
+      "stopped_reason": "completed"
+    }
+  }
+}
