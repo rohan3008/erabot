@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "erabot"
-version = "0.1.0"
+version = "0.2.0"
 description = "Find AI-agent cost risks in your code — uncapped LangGraph loops, missing caps, and LLM call-site costs. Local, no signup, MIT."
 readme = "README.md"
 license = { text = "MIT" }

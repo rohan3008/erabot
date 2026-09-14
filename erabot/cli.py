@@ -310,8 +310,21 @@ def estimate(
 
     console.print(
         "\n[dim]Free local scan — nothing left your machine. For findings + apply-ready fixes,"
-        " run the full audit at [/dim][bold]https://erabot.ai[/bold]\n"
+        " run [/dim][bold]erabot scan[/bold][dim] (the full agentic audit).[/dim]\n"
     )
+
+
+@app.command()
+def scan(
+    path: str = typer.Argument(".", help="Folder or file to audit (default: current dir)."),
+    email: Optional[str] = typer.Option(None, "--email", help="Email for your free-trial link (else prompted once)."),
+    port: Optional[int] = typer.Option(None, "--port", help="Local port for the report UI (default: 8787)."),
+) -> None:
+    """Run the FULL agentic audit locally: opens a browser file-picker, finds cost
+    waste, and proves fixes. Your code never leaves your machine. Needs Docker;
+    no key required (free trial) — set ANTHROPIC_API_KEY to use your own."""
+    from erabot.scan import run_scan
+    run_scan(path=path, email=email, port=port)
 
 
 def main() -> None:
