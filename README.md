@@ -62,7 +62,7 @@ erabot estimate . --calls-per-month 285000     # your actual monthly call volume
 erabot estimate . --json                        # machine-readable output for CI
 ```
 
-Where your prompts are literals in the code, erabot reads the real token counts. Where the prompt is built at runtime, the estimate is a **lower bound** — connect Helicone / Langfuse / OpenTelemetry for measured spend.
+Where your prompts are literals in the code, erabot reads the real token counts. Where the prompt is built at runtime, the estimate is a **lower bound** — connect Langfuse or OpenTelemetry for measured spend.
 
 ## Honest limits
 
