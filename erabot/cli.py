@@ -127,6 +127,26 @@ def estimate(
     files, skipped_tests = _collect_files(target, include_tests=include_tests)
     calls = scan_files_for_llm_calls(files)
     if not calls:
+        if as_json:
+            # Same shape as a populated result, so CI scripts that parse --json
+            # get a clean "zero" instead of a line of prose.
+            console.print_json(_json.dumps({
+                "call_sites": 0, "files": len(files),
+                "estimated_monthly_usd": 0.0,
+                "calls_per_month_per_site": calls_per_month or 10_000,
+                "volume_assumed": calls_per_month is None, "flagship_spend_pct": 0.0,
+                "flagship_share_reliable": False,
+                "model_resolution_rate": 0.0,
+                "resolved_model_sites": 0,
+                "sites_with_traced_prompts": 0,
+                "agentic": False,
+                "turns_per_task": turns_per_task or 1,
+                "turns_assumed": turns_per_task is None,
+                "turns_inferred_statically": False,
+                "loop_call_sites": 0, "orchestration_risks": 0,
+                "top": [],
+            }))
+            return
         console.print("[yellow]No LLM API calls detected.[/yellow] "
                       "(erabot scans Python/TS/JS for OpenAI, Anthropic, Gemini, LangChain, etc.)")
         raise typer.Exit(0)
@@ -277,7 +297,7 @@ def estimate(
     elif resolution_rate < 0.25:
         console.print(
             f"  [dim]The model is chosen at runtime for {(1 - resolution_rate) * 100:.0f}% of call sites, so a "
-            f"reliable flagship-model split can't be read from code alone — connect Helicone/Langfuse/OTel "
+            f"reliable flagship-model split can't be read from code alone — connect Langfuse or OpenTelemetry "
             f"for the real breakdown.[/dim]"
         )
     console.print(
@@ -298,7 +318,7 @@ def estimate(
     if untraced > 0:
         console.print(
             f"\n[dim]{untraced} of {len(rows)} call sites build their prompt at runtime, so this is a "
-            f"lower bound — connect Helicone/Langfuse/OTel for measured spend.[/dim]"
+            f"lower bound — connect Langfuse or OpenTelemetry for measured spend.[/dim]"
         )
     # Orchestration risks in agent graphs (LangGraph), already scanned up top:
     # loops with no cap, dead branches. Candidate flags — the paid audit proves & fixes.
